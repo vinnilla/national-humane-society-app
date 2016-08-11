@@ -1,0 +1,17 @@
+{
+  "name": "national-humane-society-app",
+  "version": "1.0.0",
+  "description": "An aggregate of US humane societies and all pets",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vincent Huang, Gustavo Ferreira, Fernand Tan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "lodash": "^4.14.2",
+    "mongoose": "^4.5.8"
+  }
+}
