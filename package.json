@@ -9,8 +9,11 @@
   "author": "Vincent Huang, Gustavo Ferreira, Fernand Tan",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.8",
     "lodash": "^4.14.2",
     "mongoose": "^4.5.8"
   }
