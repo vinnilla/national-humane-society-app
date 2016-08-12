@@ -1,20 +1,28 @@
 {
-  "name": "national-humane-society-app",
-  "version": "1.0.0",
-  "description": "An aggregate of US humane societies and all pets",
-  "main": "server.js",
+  "name": "wdi-students",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "Vincent Huang, Gustavo Ferreira, Fernand Tan",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^0.8.7",
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "debug": "~2.2.0",
     "dotenv": "^2.0.0",
-    "express": "^4.14.0",
-    "jsonwebtoken": "^7.1.8",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jsonwebtoken": "^7.1.9",
     "lodash": "^4.14.2",
-    "mongoose": "^4.5.8"
+    "mongoose": "^4.4.6",
+    "morgan": "^1.7.0",
+    "node-sass-middleware": "^0.9.7",
+    "passport": "^0.3.2",
+    "passport-google-oauth20": "^1.0.0",
+    "request": "^2.74.0",
+    "request-promise": "^4.1.1",
+    "serve-favicon": "~2.3.0"
   }
 }

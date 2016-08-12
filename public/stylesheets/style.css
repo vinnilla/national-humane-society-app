@@ -1,0 +1,11 @@
+.brand-logo {
+  margin-left: 15px; }
+
+.student .card-title {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin-top: -18px; }
+
+.nav-wrapper {
+	background-color: rgba(0,0,0,.9); }

@@ -1,26 +1,64 @@
 var express = require('express');
 var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+var session = require('express-session');
+var passport = require('passport');
 
-var routes = require('./config/routes');
+// load the env vars
+require('dotenv').load();
 
-
-var PORT = process.env.PORT || 3000;
-var DATABASE = process.env.MONGOLAB_URI || 'mongodb://localhost/national-humane-society-app';
-
-mongoose.connect(DATABASE, function(err, res) {
-	if (err) console.log(`error connecting to ${DATABASE}. ${err}`);
-})
+// create the Express app
 var app = express();
 
+// connect to the MongoDB with mongoose
+mongoose = require('./config/database');
 
-app.use(bodyParser());
+// configure passport
+require('./config/passport');
 
+// require our routes
+var indexRoutes = require('./routes/index');
+var authRoutes = require('./routes/auth');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+require('ejs').delimiter = '$';
+
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+// mount the session middleware
+app.use(session({
+  secret: 'WDIRocks!',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser('notsosecretnowareyou'));
+// you can now write css in scss files!
+app.use(require('node-sass-middleware')({
+  src: path.join(__dirname, 'public'),
+  dest: path.join(__dirname, 'public'),
+  indentedSyntax: false,
+  sourceMap: false
+}));
 
-app.use('/', routes);
+//mount passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.listen(PORT, function() {
-	console.log(`listening on port ${PORT}`);
-})
+// mount all routes with appropriate base paths
+app.use('/', indexRoutes);
+app.use('/', authRoutes);
+
+// invalid request, send 404 page
+app.use(function(req, res) {
+  res.status(404).send('Cant find that!');
+});
+
+module.exports = app;
