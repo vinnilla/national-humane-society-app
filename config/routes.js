@@ -28,7 +28,7 @@ router.get('/logout', function(req, res){
 });
 
 // users resource paths:
-router.get('/users', authController.verify, usersController.index);
+router.get('/users', usersController.index);
 router.get('/users/:id', usersController.show);
 router.patch('/users/:id', usersController.update);
 

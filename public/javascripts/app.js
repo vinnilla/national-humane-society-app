@@ -11,11 +11,17 @@ $("#submit-register").click(function () {
     email: email,
     password: password
   }).then(function (data) {
-    $("#results").html(data.msg)
+    if (data.error) {
+      $("#errors").html(`Error: ${data.error}`);
+    }
+    else {
+      $("#errors").html('');
+      $("#results").html(data.msg)
+      $("#login").show();
+      $("#oauth").show();
+      $("#register").hide();
+    }
   })
-  $("#login").show();
-  $("#oauth").show();
-  $("#register").hide();
 })
 
 $("#submit-login").click(function () {
@@ -26,16 +32,56 @@ $("#submit-login").click(function () {
     email: email, 
     password: password
   }).then(function (data) {
-    console.log(data)
-    $("#results").html(`JWT: ${data.token}`);
-    $("#oauth").hide();
-    $("#login").hide();
-    $("#local-logout").show();
-        // localStorage will persist the token until you explicitly
-        // delete it. Closing the browser or tab will not delete
-        // the token
-    localStorage.token = data.token
+    if (data.error) {
+      $("#errors").html(`Error: ${data.error}`);
+    }
+    else {
+      $("#errors").html('');
+      $("#results").html(`JWT: ${data.token}`);
+      $("#oauth").hide();
+      $("#login").hide();
+      $("#local-logout").show();
+      $("#update-button").show();
+          // localStorage will persist the token until you explicitly
+          // delete it. Closing the browser or tab will not delete
+          // the token
+      localStorage.token = data.token
+      localStorage.id = data.id
+    }
   })
+})
+
+$("#submit-update").click(function() {
+  var name = $("#user-name").val();
+  var address = $("#user-address").val();
+  var city = $("#user-city").val();
+  var state = $("#user-state").val();
+  var zip = $("#user-zip").val();
+  var animal = $("#preferred-animal").val();
+
+  $.ajax({
+    url: `/users/${localStorage.id}`,
+    type: "patch",
+    dataType: "json",
+    data: {
+      name: name,
+      address: address,
+      city: city,
+      state: state,
+      zip: zip,
+      animal: animal
+    }
+  })
+    .then(function(data) {
+      if (data.error) {
+        $("#errors").html(`Error: ${data.error}`);
+      }
+      else {
+        $("#errors").html('');
+        $("#additional-information").hide();
+        $("#update-button").show();
+      }
+    })
 })
 
 $("#get-users").click(function () {
@@ -64,14 +110,26 @@ $(".local-back").click(function() {
   $("#register-button").show();
 })
 
+$("#update-button").click(function() {
+  $("#additional-information").show();
+  $("#update-button").hide();
+})
+
+$(".update-back").click(function() {
+  $("#update-button").show();
+  $("#additional-information").hide();
+})
+
+
 $("#logout").click(function () {
-  console.log("clicked")
   $("#login-button").show();
   $("#register-button").show();
   $("#oauth").show();
   $("#local-logout").hide();
+  $("#update-button").hide();
   // unsetting the token will logout the user
   localStorage.removeItem('token');
+  localStorage.removeItem('id');
 })
 
 $("#get-user").click(function() {

@@ -30,8 +30,12 @@
 
         </ul>
         <ul class="right">
-          <button class="nav-button" id="login-button">Login</button>
-          
+          <$ if (user) { $>
+            <button class="nav-button" id="update-button">Update</button>
+          <$ } else { $>
+            <button class="nav-button" id="login-button">Login</button>
+          <$ } $>
+          <button class="nav-button hidden" id="update-button">Update</button>
           <div class="nav-form hidden" id="login">
             <button class="nav-submit local-back right">Back</button>
             <input type="email" id="login-email" placeholder="email" autofocus> 
@@ -47,10 +51,23 @@
             <button class="nav-submit" id="submit-register">Register</button>  
           </div>
 
+          <div class="nav-form hidden" id="additional-information">
+            <button class="nav-submit update-back right">Back</button>
+            <input type="text" id="user-name" placeholder="name" autofocus>
+            <input type="text" id="user-address" placeholder="address">
+            <input type="text" id="user-city" placeholder="city">
+            <input type="text" id="user-state" placeholder="state">
+            <input type="number" id="user-zip" placeholder="zip">
+            <input type="text" id="preferred-animal" placeholder="preferred animal">
+            <button class="nav-submit" id="submit-update">Update</button> 
+          </div>
+
         </ul>
 
         <ul class="right">
+          <$ if (!user) { $>
           <button class="nav-button" id="register-button">Register</button>
+          <$ } $>
         </ul>
 
       </div>
@@ -62,7 +79,6 @@
 
   <div class="row">
     <div class="col s2">
-      <!-- search -->
       <div class="input-field">
         <input id="search" type="search" placeholder="search name">
         <i class="material-icons">close</i>
@@ -73,6 +89,11 @@
       <button id="get-users">Get Users</button>
       <div id="users"></div>
     </div>
+
+    <div>
+      <button id="get-user">Get User</button>
+    </div>
+
   </div>
 
   <!-- embed the current user's id -->
