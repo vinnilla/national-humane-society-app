@@ -13,13 +13,39 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a href="" class="brand-logo left">National Humane Society</a>
+        <a href="/" class="brand-logo left">National Humane Society</a>
         <ul class="right">
-        <$ if (user) { $>
-          <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
-          <$ } else { $>
-          <li><a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a></li>
-          <$ } $>
+          <button class="nav-button" id="login-button">Login</button>
+
+          <div id="oauth" class="hidden">
+            <$ if (user) { $>
+              <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
+            <$ } else { $>
+              <li><a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a></li>
+            <$ } $>
+          </div>
+
+          <div id="local-logout" class="hidden">
+            <button class="nav-button" id="logout"><i class="material-icons left">trending_flat</i>Logout</button>
+          </div>
+
+        </ul>
+        <ul class="right">
+          <button class="nav-button" id="register-button">Register</button>
+          
+          <div class="nav-form hidden" id="login">
+            <input type="email" id="login-email" placeholder="email"> 
+            <input type="password" id="login-password" placeholder="password">
+            <button class="nav-button" id="submit-login">Login</button>
+          </div>
+
+          <div class="nav-form hidden" id="register">
+            <input type="email" id="register-email" placeholder="email">
+            <input type="password" id="register-password" placeholder="password">
+            <input type="password" id="confirm-password" placeholder="confirm password">
+            <button class="nav-button" id="submit-register">Register</button>  
+          </div>
+
         </ul>
       </div>
     </nav>
@@ -27,21 +53,21 @@
 
   <div id="errors"></div>
   <div id="results"></div>
-
-  <div class="row">
+    
+  <!-- <$ if (!user) { $>
+  <div class="row right" id="enter">
     <div class="col s2" id="register">
       Email: <input type="email" id="register-email"> Password: <input type="password" id="register-password"> Confirm Password: <input type="password" id="confirm-password">
-      <button id="submit-register">Register</button>
+            <button class="nav-button" id="submit-register">Register</button>
     </div>
 
     <div class="col s2" id="login">
       Email: <input type="email" id="login-email"> Password: <input type="password" id="login-password">
       <button id="submit-login">Login</button>
     </div>
-    
-    <button id="logout">Logout</button>
-
   </div>
+  <$ } $> -->
+
 
   <div class="row">
     <div class="col s2">
@@ -61,9 +87,6 @@
       <div id="users"></div>
     </div>
   </div>
-
-  <button id="get-post">Get Post</button>
-  <div id="post"></div>
 
   <!-- embed the current user's id -->
   <script>

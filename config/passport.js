@@ -1,6 +1,7 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var User = require('../models/user');
+var jwt = require('jsonwebtoken');
 
 // configure passport with a strategy and provide a verify callback
 passport.use(new GoogleStrategy({

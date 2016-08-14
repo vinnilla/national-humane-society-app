@@ -13,6 +13,8 @@ $("#submit-register").click(function () {
   }).then(function (data) {
     $("#results").html(data.msg)
   })
+  $("#login").show();
+  $("#register").hide();
 })
 
 $("#submit-login").click(function () {
@@ -24,12 +26,14 @@ $("#submit-login").click(function () {
     password: password
   }).then(function (data) {
     console.log(data)
-    $("#results").html(`JWT: ${data.token}`)
+    $("#results").html(`JWT: ${data.token}`);
+    $("#oauth").hide();
+    $("#login").hide();
+    $("#local-logout").show();
         // localStorage will persist the token until you explicitly
         // delete it. Closing the browser or tab will not delete
         // the token
     localStorage.token = data.token
-    localStorage.id = data.id;
   })
 })
 
@@ -40,21 +44,32 @@ $("#get-users").click(function () {
   })
 })
 
+$("#login-button").click(function() {
+  $("#oauth").show();
+  $("#login").show();
+  $("#login-button").hide();
+  $("#register-button").hide();
+})
+
+$("#register-button").click(function() {
+  $("#oauth").show();
+  $("#register").show();
+  $("#login-button").hide();
+  $("#register-button").hide();
+})
+
 $("#logout").click(function () {
-    // unsetting the token will logout the user
-    localStorage.removeItem('token')
+  console.log("clicked")
+  $("#login-button").show();
+  $("#register-button").show();
+  $("#local-logout").hide();
+  // unsetting the token will logout the user
+  localStorage.removeItem('token');
 })
 
 $("#get-user").click(function() {
   $.get(`/users/${localStorage.id}`, { token: localStorage.token })
   .then(function (user) {
     $("#users").html(JSON.stringify(user))
-  })
-})
-
-$("#get-post").click(function() {
-  $.get(`/post`, { token: localStorage.token })
-  .then(function(data) {
-    $("#post").html(JSON.stringify(data));
   })
 })
