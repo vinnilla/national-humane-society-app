@@ -14,6 +14,7 @@ $("#submit-register").click(function () {
     $("#results").html(data.msg)
   })
   $("#login").show();
+  $("#oauth").show();
   $("#register").hide();
 })
 
@@ -45,23 +46,29 @@ $("#get-users").click(function () {
 })
 
 $("#login-button").click(function() {
-  $("#oauth").show();
   $("#login").show();
   $("#login-button").hide();
   $("#register-button").hide();
 })
 
 $("#register-button").click(function() {
-  $("#oauth").show();
   $("#register").show();
   $("#login-button").hide();
   $("#register-button").hide();
+})
+
+$(".local-back").click(function() {
+  $("#login").hide();
+  $("#register").hide();
+  $("#login-button").show();
+  $("#register-button").show();
 })
 
 $("#logout").click(function () {
   console.log("clicked")
   $("#login-button").show();
   $("#register-button").show();
+  $("#oauth").show();
   $("#local-logout").hide();
   // unsetting the token will logout the user
   localStorage.removeItem('token');

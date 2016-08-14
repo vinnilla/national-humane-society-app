@@ -15,9 +15,8 @@
       <div class="nav-wrapper">
         <a href="/" class="brand-logo left">National Humane Society</a>
         <ul class="right">
-          <button class="nav-button" id="login-button">Login</button>
 
-          <div id="oauth" class="hidden">
+          <div id="oauth">
             <$ if (user) { $>
               <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
             <$ } else { $>
@@ -31,43 +30,35 @@
 
         </ul>
         <ul class="right">
-          <button class="nav-button" id="register-button">Register</button>
+          <button class="nav-button" id="login-button">Login</button>
           
           <div class="nav-form hidden" id="login">
-            <input type="email" id="login-email" placeholder="email"> 
+            <button class="nav-submit local-back right">Back</button>
+            <input type="email" id="login-email" placeholder="email" autofocus> 
             <input type="password" id="login-password" placeholder="password">
-            <button class="nav-button" id="submit-login">Login</button>
+            <button class="nav-submit" id="submit-login">Login</button>
           </div>
 
           <div class="nav-form hidden" id="register">
-            <input type="email" id="register-email" placeholder="email">
+            <button class="nav-submit local-back right">Back</button>
+            <input type="email" id="register-email" placeholder="email" autofocus>
             <input type="password" id="register-password" placeholder="password">
             <input type="password" id="confirm-password" placeholder="confirm password">
-            <button class="nav-button" id="submit-register">Register</button>  
+            <button class="nav-submit" id="submit-register">Register</button>  
           </div>
 
         </ul>
+
+        <ul class="right">
+          <button class="nav-button" id="register-button">Register</button>
+        </ul>
+
       </div>
     </nav>
   </div>
 
   <div id="errors"></div>
   <div id="results"></div>
-    
-  <!-- <$ if (!user) { $>
-  <div class="row right" id="enter">
-    <div class="col s2" id="register">
-      Email: <input type="email" id="register-email"> Password: <input type="password" id="register-password"> Confirm Password: <input type="password" id="confirm-password">
-            <button class="nav-button" id="submit-register">Register</button>
-    </div>
-
-    <div class="col s2" id="login">
-      Email: <input type="email" id="login-email"> Password: <input type="password" id="login-password">
-      <button id="submit-login">Login</button>
-    </div>
-  </div>
-  <$ } $> -->
-
 
   <div class="row">
     <div class="col s2">
@@ -76,10 +67,6 @@
         <input id="search" type="search" placeholder="search name">
         <i class="material-icons">close</i>
       </div>
-    </div>
-  
-    <div class="col s4">
-      <button id="get-user">Get My User</button>
     </div>
 
     <div class="col s6">
