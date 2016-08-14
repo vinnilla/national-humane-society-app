@@ -50,8 +50,20 @@ function update(req, res, next) {
   });
 };
 
+function destroy(req, res, next) {
+  User.findByIdAndRemove(req.params.id, function(err, user) {
+    if (err) {
+      res.json({message: `Could not find and delete user because ${err}`});
+    }
+    else {
+      res.json({message: `Successfully deleted user ${req.params.id}`});
+    }
+  })
+}
+
 module.exports = {
   index: index,
   show:  show,
   update: update,
+  delete: destroy
 };

@@ -31,6 +31,7 @@ router.get('/logout', function(req, res){
 router.get('/users', usersController.index);
 router.get('/users/:id', usersController.show);
 router.patch('/users/:id', usersController.update);
+router.delete("/users/:id", usersController.delete);
 
 // login and register routes
 router.post('/login', authController.login);
