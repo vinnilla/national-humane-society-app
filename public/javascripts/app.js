@@ -139,6 +139,37 @@ $(".update-back").click(function() {
   $("#additional-information").hide();
 })
 
+$("#shelter-button").click(function() {
+  $("#shelter-button").hide();
+  $("#shelter-information").show();
+})
+
+$(".shelter-back").click(function() {
+  $("#shelter-information").hide();
+  $("#shelter-button").show();
+})
+
+$("#submit-shelter").click(function() {
+  $("#shelter-information").hide();
+  $("#shelter-button").show();
+  $("#pet-button").show();
+})
+
+$("#pet-button").click(function() {
+  $("#pet-button").hide();
+  $("#pet-information").show();
+})
+
+$(".pet-back").click(function() {
+  $("#pet-information").hide();
+  $("#pet-button").show();
+})
+
+$("#submit-pet").click(function() {
+  $("#pet-information").hide();
+  $("#pet-button").show();
+})
+
 
 $("#logout").click(function () {
   $("#login-button").show();

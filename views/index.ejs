@@ -36,19 +36,12 @@
             <button class="nav-button" id="login-button">Login</button>
           <$ } $>
           <button class="nav-button hidden" id="update-button">Update</button>
+
           <div class="nav-form hidden" id="login">
             <button class="nav-submit local-back right">Back</button>
             <input type="email" id="login-email" placeholder="email" autofocus> 
             <input type="password" id="login-password" placeholder="password">
             <button class="nav-submit" id="submit-login">Login</button>
-          </div>
-
-          <div class="nav-form hidden" id="register">
-            <button class="nav-submit local-back right">Back</button>
-            <input type="email" id="register-email" placeholder="email" autofocus>
-            <input type="password" id="register-password" placeholder="password">
-            <input type="password" id="confirm-password" placeholder="confirm password">
-            <button class="nav-submit" id="submit-register">Register</button>  
           </div>
 
           <div class="nav-form hidden" id="additional-information">
@@ -65,7 +58,6 @@
             <$ } $>
             <button class="nav-submit" id="submit-update">Update</button>
           </div>
-
         </ul>
 
         <ul class="right">
@@ -76,6 +68,64 @@
           <button class="nav-button" id="shelter-button">Shelter</button>
           <$ }} $>
           <button class="nav-button hidden" id="shelter-button">Shelter</button>
+
+          <div class="nav-form hidden" id="register">
+            <button class="nav-submit local-back right">Back</button>
+            <input type="email" id="register-email" placeholder="email" autofocus>
+            <input type="password" id="register-password" placeholder="password">
+            <input type="password" id="confirm-password" placeholder="confirm password">
+            <button class="nav-submit" id="submit-register">Register</button>  
+          </div>
+
+          <div class="nav-form hidden" id="shelter-information">
+            <button class="nav-submit shelter-back right">Back</button>
+            <input type="text" id="shelter-name" placeholder="name" autofocus>
+            <input type="text" id="shelter-address" placeholder="address">
+            <input type="text" id="shelter-city" placeholder="city">
+            <input type="text" id="shelter-state" placeholder="state">
+            <input type="number" id="shelter-zip" placeholder="zip">
+            <input type="text" id="shelter-description" placeholder="description">
+            <input type="text" id="shelter-phone" placeholder="phone">
+            <input type="email" id="shelter-email" placeholder="email">
+            <button class="nav-submit" id="submit-shelter">New Shelter</button>
+          </div>
+        </ul>
+
+        <ul class="right">
+          <$ if (user) { 
+                if (user.shelterId) {$>
+          <button class="nav-button" id="pet-button">Pet</button>
+          <$ }} $>
+          <button class="nav-button hidden" id="pet-button">Pet</button>
+
+          <div class="nav-form hidden" id="pet-information">
+            <button class="nav-submit pet-back right">Back</button>
+            <input type="text" id="pet-name" placeholder="name" autofocus>
+            <select name="animal" id="pet-animal">
+              <option value="default">animal</option>
+              <option value="cat">Cat</option>
+              <option value="dog">Dog</option>
+              <option value="bird">Bird</option>
+              <option value="reptile">Reptile</option>
+              <option value="small">Small Critters</option>
+              <option value="large">Large Critters</option>              
+            </select>
+            <input type="text" id="pet-breed" placeholder="breed">
+            <select name="size" id="pet-size">
+              <option value="default">size</option>
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+              <option value="xl">X-Large</option>
+            </select>
+            <select name="sex" id="pet-sex">
+              <option value="default">gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <input type="number" id="pet-age" placeholder="age">
+            <button class="nav-submit" id="submit-pet">New Pet</button>
+          </div>
         </ul>
 
       </div>
