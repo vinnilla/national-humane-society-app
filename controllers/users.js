@@ -38,6 +38,9 @@ function update(req, res, next) {
       if(req.body.state) user.state = req.body.state;
       if(req.body.zip) user.zip = req.body.zip;
       if(req.body.animal) user.preferred_animal = req.body.animal;
+      if(req.body.shelter == 'true') {
+        user.shelter = true;}
+      else {user.shelter = false;}
       user.save(function(err, user) {
         if (err) {
           res.json({error: err})

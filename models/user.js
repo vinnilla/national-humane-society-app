@@ -9,6 +9,7 @@ var userSchema= new mongoose.Schema({
 	state: String,
 	zip: Number,
 	preferred_animal: String,
+	shelter: Boolean, default: false,
 	googleId: String,
 	created: {type: Date, default: Date.now}
 });

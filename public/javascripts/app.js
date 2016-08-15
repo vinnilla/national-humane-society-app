@@ -42,6 +42,8 @@ $("#submit-login").click(function () {
       $("#login").hide();
       $("#local-logout").show();
       $("#update-button").show();
+      if (data.shelter) $("#shelter-button").show();
+      else $("#shelter-button").hide();
           // localStorage will persist the token until you explicitly
           // delete it. Closing the browser or tab will not delete
           // the token
@@ -58,9 +60,12 @@ $("#submit-update").click(function() {
   var state = $("#user-state").val();
   var zip = $("#user-zip").val();
   var animal = $("#preferred-animal").val();
+  var shelter = $("#user-shelter").val();
+  var oauthId = $("#oauth-id").html();
+  if (!oauthId) oauthId = localStorage.id;
 
   $.ajax({
-    url: `/users/${localStorage.id}`,
+    url: `/users/${oauthId}`,
     type: "patch",
     dataType: "json",
     data: {
@@ -69,7 +74,8 @@ $("#submit-update").click(function() {
       city: city,
       state: state,
       zip: zip,
-      animal: animal
+      animal: animal,
+      shelter: shelter
     }
   })
     .then(function(data) {
@@ -80,9 +86,22 @@ $("#submit-update").click(function() {
         $("#errors").html('');
         $("#additional-information").hide();
         $("#update-button").show();
+        if (data.shelter) $("#shelter-button").show();
+        else $("#shelter-button").hide();
       }
     })
 })
+
+$("#user-shelter").click(function() {
+  var box = $("#user-shelter");
+  if (box.val() == 'true') {
+    box.val('false');
+  }
+  else {
+    box.val('true');
+  }
+  console.log(box.val());
+});
 
 $("#get-users").click(function () {
   $.get("/users", { token: localStorage.token })
@@ -127,13 +146,16 @@ $("#logout").click(function () {
   $("#oauth").show();
   $("#local-logout").hide();
   $("#update-button").hide();
+  $("#shelter-button").hide();
   // unsetting the token will logout the user
   localStorage.removeItem('token');
   localStorage.removeItem('id');
 })
 
 $("#get-user").click(function() {
-  $.get(`/users/${localStorage.id}`, { token: localStorage.token })
+  var oauthId = $("#oauth-id").html();
+  if (!oauthId) oauthId = localStorage.id;
+  $.get(`/users/${oauthId}`, { token: localStorage.token })
   .then(function (user) {
     $("#users").html(JSON.stringify(user))
   })

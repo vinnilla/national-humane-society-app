@@ -28,6 +28,11 @@
 	width: 400px;
 }
 
+#user-shelter {
+	position: initial;
+	visibility: visible;
+}
+
 .hidden {
 	display:none;
 }

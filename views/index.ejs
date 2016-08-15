@@ -59,7 +59,11 @@
             <input type="text" id="user-state" placeholder="state">
             <input type="number" id="user-zip" placeholder="zip">
             <input type="text" id="preferred-animal" placeholder="preferred animal">
-            <button class="nav-submit" id="submit-update">Update</button> 
+            <input type="checkbox" name="shelter" id="user-shelter" value="">Shelter<br>
+            <$ if (user) { $>
+              <div class="hidden" id="oauth-id"><$= user.id $></div>
+            <$ } $>
+            <button class="nav-submit" id="submit-update">Update</button>
           </div>
 
         </ul>
@@ -67,7 +71,11 @@
         <ul class="right">
           <$ if (!user) { $>
           <button class="nav-button" id="register-button">Register</button>
-          <$ } $>
+          <$ } else { $>
+          <$ if (user.shelter) { $>
+          <button class="nav-button" id="shelter-button">Shelter</button>
+          <$ }} $>
+          <button class="nav-button hidden" id="shelter-button">Shelter</button>
         </ul>
 
       </div>
