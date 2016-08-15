@@ -10,15 +10,27 @@
 .nav-wrapper {
 	background-color: rgba(0,0,0,.9); }
 
-.nav-button {
+.nav-button, .nav-submit {
 	background-color: rgba(0,0,0,0);
 	border: solid 0px;
+}
+
+.nav-button {
+	margin: 0 20px;
 }
 
 .nav-form {
 	color: white;
 	background-color: black;
-	border: 10px black solid;
+	border-width: 0px 20px 5px 20px;
+	border-style: solid;
+	border-color: black;
+	width: 400px;
+}
+
+#user-shelter {
+	position: initial;
+	visibility: visible;
 }
 
 .hidden {
@@ -48,4 +60,10 @@ html, body {
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
   padding-left: 10px;
+
+select {
+	display: inline-block;
+	background-color: black;
+	border: black;
+	margin-left: -10px;
 }
