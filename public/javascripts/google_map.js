@@ -1,8 +1,9 @@
 //Google_map//   US {lat: 37.09024, lng: -95.712891}
 
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 5,
+    zoom: 8,
     center: {lat: 37.09024, lng: -95.712891}
   });
   var geocoder = new google.maps.Geocoder();
@@ -19,7 +20,8 @@ function geocodeAddress(geocoder, resultsMap) {
       resultsMap.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
         map: resultsMap,
-        position: results[0].geometry.location
+        position: results[0].geometry.location,
+        icon: '/images/dog-marker-sm.png',
       });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
