@@ -22,7 +22,7 @@ $("#submit-login").click(function () {
   var password = $("#login-password").val()
 
   $.post("/login", {
-    email: email, 
+    email: email,
     password: password
   }).then(function (data) {
     console.log(data)

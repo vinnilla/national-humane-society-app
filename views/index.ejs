@@ -49,6 +49,10 @@
         </ul>
       </div>
     </nav>
+    <div id="floating-panel">
+  <input id="address" type="textbox" value=" ">
+  <input id="submit" type="button" value="Location">
+</div>
   </div>
 
   <div id="errors"></div>
@@ -65,6 +69,12 @@
       Email: <input type="email" id="login-email"> Password: <input type="password" id="login-password">
       <button id="submit-login">Login</button>
     </div>
+<<<<<<< HEAD
+=======
+
+    <button id="logout">Logout</button>
+
+>>>>>>> 647567451feadc291f557cb86acbd3330331ebae
   </div>
   <$ } $> -->
 
@@ -77,7 +87,7 @@
         <i class="material-icons">close</i>
       </div>
     </div>
-  
+
     <div class="col s4">
       <button id="get-user">Get My User</button>
     </div>
@@ -96,6 +106,18 @@
     <$ } $>
   </script>
 
+
+<div id="map"></div>
+
+<!-- Replace the value of the key parameter with your own API key. -->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMO9jnjHLk50wNoiexBTCCd_wH8F6MWLY&callback=initMap">
+</script>
+
+
+
+
+
   <!-- jQuery (required by Materialize) -->
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <!-- Using Underscore for collection manipulation and client-side templatin -->
@@ -103,6 +125,6 @@
   <!-- JavaScript for Materialize -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <script src="javascripts/app.js"></script>
-
+  <<script src="/javascripts/google_map.js" type="text/javascript"></script>
 </body>
 </html>
