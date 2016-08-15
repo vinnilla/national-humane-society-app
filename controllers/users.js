@@ -1,6 +1,5 @@
 // Require resource's model(s).
 var User = require("../models/user");
-var rp = require("request-promise");
 
 var index = function(req, res, next){
   User.find({}, function(err, users) {
@@ -13,31 +12,61 @@ var index = function(req, res, next){
 };
 
 var show = function(req, res, next){
-  if (req.params.id != req.token.user) {
-    res.json({ error: "Wrong user in token" })
-  }
-  else {
-    User.findById(req.params.id, function(err, user) {
-      if (err) {
-        res.json({message: 'Could not find user because ' + err});
-      } else if (!user) {
-        res.json({message: 'No user with this id.'});
-      } else {
-        res.json(user);
-      }
-    });
-  }
+  User.findById(req.params.id, function(err, user) {
+    if (err) {
+      res.json({message: 'Could not find user because ' + err});
+    } else if (!user) {
+      res.json({message: 'No user with this id.'});
+    } else {
+      res.json(user);
+    }
+  });
 };
 
-var post = function(req, res, next) {
-  rp.get("http://jsonplaceholder.typicode.com/posts/1")
-    .then(function(data) {
-      res.json(data);
-    })
+function update(req, res, next) {
+  User.findById(req.params.id, function(err, user) {
+    if (err) {
+      res.json({message: `Could not find user because ${err}`});
+    }
+    else if (!user) {
+      res.json({message: "No user with this id."});
+    }
+    else {
+      if(req.body.name) user.name = req.body.name;
+      if(req.body.address) user.address = req.body.address;
+      if(req.body.city) user.city = req.body.city;
+      if(req.body.state) user.state = req.body.state;
+      if(req.body.zip) user.zip = req.body.zip;
+      if(req.body.animal) user.preferred_animal = req.body.animal;
+      if(req.body.shelter == 'true') {
+        user.shelter = true;}
+      else {user.shelter = false;}
+      user.save(function(err, user) {
+        if (err) {
+          res.json({error: err})
+        }
+        else {
+          res.json(user);
+        }
+      });
+    };
+  });
+};
+
+function destroy(req, res, next) {
+  User.findByIdAndRemove(req.params.id, function(err, user) {
+    if (err) {
+      res.json({message: `Could not find and delete user because ${err}`});
+    }
+    else {
+      res.json({message: `Successfully deleted user ${req.params.id}`});
+    }
+  })
 }
 
 module.exports = {
   index: index,
   show:  show,
-  post: post
+  update: update,
+  delete: destroy
 };
