@@ -36,19 +36,28 @@ $("#submit-login").click(function () {
       $("#errors").html(`Error: ${data.error}`);
     }
     else {
-      $("#errors").html('');
-      $("#results").html(`JWT: ${data.token}`);
-      $("#oauth").hide();
-      $("#login").hide();
-      $("#local-logout").show();
-      $("#update-button").show();
-      if (data.shelter) $("#shelter-button").show();
-      else $("#shelter-button").hide();
           // localStorage will persist the token until you explicitly
           // delete it. Closing the browser or tab will not delete
           // the token
       localStorage.token = data.token
       localStorage.id = data.id
+      $.get(`/users/${localStorage.id}`)
+        .then(function(user) {
+          if (user.shelterId) {
+            localStorage.shelter = user.shelterId;
+            $(".edit-shelter-button").show();
+            $("#pet-button").show();
+          }
+          else {
+            $("#shelter-button").show();
+          }
+          $("#errors").html('');
+          $("#results").html(`JWT: ${data.token}`);
+          $("#oauth").hide();
+          $("#login").hide();
+          $("#local-logout").show();
+          $("#update-button").show();
+        })
     }
   })
 })
@@ -90,6 +99,43 @@ $("#submit-update").click(function() {
         else $("#shelter-button").hide();
       }
     })
+})
+
+$("#submit-shelter").click(function() {
+  var name = $("#shelter-name").val();
+  var address = $("#shelter-address").val();
+  var city = $("#shelter-city").val();
+  var state = $("#shelter-state").val();
+  var zip = $("#shelter-zip").val();
+  var description = $("#shelter-description").val();
+  var phone = $("#shelter-phone").val();
+  var email = $("#shelter-email").val();
+  var oauthId = $("#oauth-id").html();
+  if (!oauthId) oauthId = localStorage.id;
+
+  $.post(`/users/${oauthId}/shelters`, {
+    name: name,
+    address: address,
+    city: city,
+    state: state,
+    zip: zip,
+    description: description,
+    phone: phone,
+    email: email,
+    user_id: oauthId
+  })
+  .then(function (data) {
+    if (data.error) {
+      $("#errors").html(`Error: ${data.error}`);
+    }
+    else {
+      $("#errors").html('');
+      $("#results").html(data.msg, data.shelter);
+      $(".edit-shelter-button").show();
+      $("#shelter-information").hide();
+      $("#shelter-button").hide();
+    }
+  })
 })
 
 $("#user-shelter").click(function() {
@@ -144,9 +190,83 @@ $("#shelter-button").click(function() {
   $("#shelter-information").show();
 })
 
+$(".edit-shelter-button").click(function() {
+  var oauthId = $("#oauth-id").html();
+  if (!oauthId) oauthId = localStorage.id;
+  $.get(`/users/${oauthId}`)
+    .then(function(user) {
+      localStorage.shelter = user.shelterId
+      $.get(`/shelters/${user.shelterId}`)
+        .then(function(shelter) {
+          $(".edit-shelter-button").hide();
+          $("#shelter-update").show();
+        })
+    })
+})
+
+$("#update-shelter").click(function() {
+  var name = $("#shelter-u-name").val();
+  var address = $("#shelter-u-address").val();
+  var city = $("#shelter-u-city").val();
+  var state = $("#shelter-u-state").val();
+  var zip = $("#shelter-u-zip").val();
+  var description = $("#shelter-u-description").val();
+  var phone = $("#shelter-u-phone").val();
+  var email = $("#shelter-u-email").val();
+
+  $.ajax({
+    url: `/shelters/${localStorage.shelter}`,
+    type: "patch",
+    dataType: "json",
+    data: {
+      name: name,
+      address: address,
+      city: city,
+      state: state,
+      zip: zip,
+      description: description,
+      phone: phone,
+      email: email
+    }
+  })
+    .then(function(data) {
+      if (data.error) {
+        $("#errors").html(`Error: ${data.error}`);
+      }
+      else {
+        $("#errors").html('');
+        $(".edit-shelter-button").show();
+        $("#shelter-update").hide();
+      }
+    })
+})
+
+$("#delete-shelter").click(function() {
+  $.ajax({
+    url: `/shelters/${localStorage.shelter}`,
+    type: "delete"
+  })
+    .then(function(data) {
+      if (data.error) {
+        $("#errors").html(`Error: ${data.error}`);
+      }
+      else {
+        $("#errors").html('');
+        $("#shelter-update").hide();
+        $("#pet-button").hide();
+        $("#shelter-button").show();
+      }
+    })
+})
+
 $(".shelter-back").click(function() {
   $("#shelter-information").hide();
   $("#shelter-button").show();
+})
+
+$(".shelter-u-back").click(function() {
+  $("#shelter-update").hide();
+  $(".edit-shelter-button").show();
 })
 
 $("#submit-shelter").click(function() {

@@ -65,9 +65,11 @@
           <button class="nav-button" id="register-button">Register</button>
           <$ } else { $>
           <$ if (user.shelter) { $>
-          <button class="nav-button" id="shelter-button">Shelter</button>
+          <button class="nav-button" id="shelter-button">New Shelter</button>
+          <button class="nav-button hidden edit-shelter-button">Shelter</button>
           <$ }} $>
-          <button class="nav-button hidden" id="shelter-button">Shelter</button>
+          <button class="nav-button hidden" id="shelter-button">New Shelter</button>
+          <button class="nav-button hidden edit-shelter-button">Shelter</button>
 
           <div class="nav-form hidden" id="register">
             <button class="nav-submit local-back right">Back</button>
@@ -88,6 +90,20 @@
             <input type="text" id="shelter-phone" placeholder="phone">
             <input type="email" id="shelter-email" placeholder="email">
             <button class="nav-submit" id="submit-shelter">New Shelter</button>
+          </div>
+          
+          <div class="nav-form hidden" id="shelter-update">
+            <button class="nav-submit shelter-u-back right">Back</button>
+            <input type="text" id="shelter-u-name" placeholder="name" autofocus>
+            <input type="text" id="shelter-u-address" placeholder="address">
+            <input type="text" id="shelter-u-city" placeholder="city">
+            <input type="text" id="shelter-u-state" placeholder="state">
+            <input type="number" id="shelter-u-zip" placeholder="zip">
+            <input type="text" id="shelter-u-description" placeholder="description">
+            <input type="text" id="shelter-u-phone" placeholder="phone">
+            <input type="email" id="shelter-u-email" placeholder="email">
+            <button class="nav-submit" id="update-shelter">Update Shelter</button>
+            <button class="nav-submit" id="delete-shelter">Delete Shelter</button>
           </div>
         </ul>
 
@@ -138,9 +154,14 @@
 
   <div id="errors"></div>
   <div id="results"></div>
-    
 
-
+  <$ if (shelter) { $>
+    <div><$=shelter$></div>
+  <$ } $>
+  
+  <$ if (user) { $>
+    <div><$=user$></div>
+  <$ } $>
   <div class="row">
     <div class="col s2">
       <div class="input-field">
@@ -189,5 +210,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMO9jnjHLk50wNoiexBTCCd_w
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <script src="javascripts/app.js"></script>
   <<script src="/javascripts/google_map.js" type="text/javascript"></script>
+  
+
 </body>
 </html>

@@ -5,17 +5,22 @@ var petSchema = new mongoose.Schema ({
   name: String,
   animal: String,
   breed: String,
-  size: Number,
+  size: String,
   sex: String,
   age: Number
 })
 
 var shelterSchema = new mongoose.Schema({
   name: String,
-  location: String,
+  address: String,
+  city: String,
+  state: String,
+  zip: Number,
   pets: [petSchema],
   description: String,
-  contact_info: String
+  phone: String,
+  email: String,
+  userId: String
 });
 
 
