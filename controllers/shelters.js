@@ -132,13 +132,84 @@ function newpet(req, res, next) {
 function showpets(req, res, next) {
   Shelter.findById(req.params.id, function(err, shelter) {
     if (err) {
-      res.json({message: `Could not find user because ${err}`});
+      res.json({message: `Could not find shelter because ${err}`});
     }
     else if (!shelter) {
       res.json({message: `No shelter with id ${req.params.id}`});
     }
     else {
       res.json(shelter.pets);
+    };
+  });
+};
+
+function showpet(req,res,next) {
+  Shelter.findById(req.params.shelter_id, function(err, shelter) {
+  if (err) {
+      res.json({message: `Could not find shelter because ${err}`});
+    }
+    else if (!shelter) {
+      res.json({message: `No shelter with id ${req.params.id}`});
+    }
+    else {
+      shelter.pets.forEach(function(pet, index) {
+        if(pet._id == req.params.id) {
+          res.json(pet);
+        }
+      })
+    };
+  });
+}
+
+function deletepet(req,res,next) {
+  Shelter.findById(req.params.shelter_id, function(err, shelter) {
+    if (err) {
+      res.json({message: `Could not find user because ${err}`});
+    }
+    else if (!shelter) {
+      res.json({message: `No shelter with id ${req.params.id}`});
+    }
+    else {
+      shelter.pets.forEach(function(pet, index) {
+        if (pet._id == req.params.id) {
+          shelter.pets.splice(index, 1);
+          shelter.save(function(err, shelter) {
+            if (err) res.json({message: `Shelter could not be updated because ${err}`});
+            else {
+              res.json({message: `successfully deleted pet`});
+            };
+          });
+        }; 
+      });
+    };
+  });
+};
+
+function editpet(req,res,next) {
+  Shelter.findById(req.params.shelter_id, function(err, shelter) {
+    if (err) {
+      res.json({message: `Could not find user because ${err}`});
+    }
+    else if (!shelter) {
+      res.json({message: `No shelter with id ${req.params.id}`});
+    }
+    else {
+      shelter.pets.forEach(function(pet, index) {
+        if (pet._id == req.params.id) {
+          if(req.body.name) pet.name = req.body.name;
+          if(req.body.animal) pet.animal = req.body.animal;
+          if(req.body.breed) pet.breed = req.body.breed; 
+          if(req.body.size) pet.size = req.body.size;
+          if(req.body.sex) pet.sex = req.body.sex;
+          if(req.body.age) pet.age = req.body.age;
+          shelter.save(function(err, shelter) {
+            if (err) res.json({message: `Shelter could not be updated because ${err}`});
+            else {
+              res.json(shelter);
+            };
+          });
+        };
+      });
     };
   });
 };
@@ -150,6 +221,8 @@ module.exports = {
   update: update,
   newpet: newpet,
   delete: destroy,
-  showpets: showpets
+  showpets: showpets,
+  deletepet: deletepet,
+  editpet: editpet,
+  showpet: showpet
 }
-

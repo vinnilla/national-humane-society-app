@@ -1,4 +1,9 @@
+$(document).ready(function() {
+
+console.log('document loaded');
+
 $("#submit-register").click(function () {
+  // grab data from html form
   var email = $("#register-email").val()
   var password = $("#register-password").val()
   var confirmPassword = $("#confirm-password").val()
@@ -7,6 +12,8 @@ $("#submit-register").click(function () {
     $("#errors").html("Passwords do not match")
     return false; // this will end the callback execution
   }
+
+  // create a new user in database
   $.post("/register", {
     email: email,
     password: password
@@ -17,9 +24,10 @@ $("#submit-register").click(function () {
     else {
       $("#errors").html('');
       $("#results").html(data.msg)
-      $("#login").show();
       $("#oauth").show();
       $("#register").hide();
+      $("#register-button").show();
+      $("#login-button").show();
     }
   })
 })
@@ -43,6 +51,7 @@ $("#submit-login").click(function () {
       localStorage.id = data.id
       $.get(`/users/${localStorage.id}`)
         .then(function(user) {
+          // has shelter
           if (user.shelterId) {
             localStorage.shelter = user.shelterId;
             $(".edit-shelter-button").show();
@@ -50,10 +59,14 @@ $("#submit-login").click(function () {
             $("#show-pets-button").show();
           }
           else {
-            $("#shelter-button").show();
+            // option to create a shelter
+            if (user.shelter) {
+              $("#shelter-button").show();
+            }
           }
           $("#errors").html('');
-          $("#results").html(`JWT: ${data.token}`);
+          $("#results").html('');
+          // $("#results").html(`JWT: ${data.token}`);
           $("#oauth").hide();
           $("#login").hide();
           $("#local-logout").show();
@@ -71,6 +84,7 @@ $("#submit-update").click(function() {
   var zip = $("#user-zip").val();
   var animal = $("#preferred-animal").val();
   var shelter = $("#user-shelter").val();
+  
   var oauthId = $("#oauth-id").html();
   if (!oauthId) oauthId = localStorage.id;
 
@@ -177,8 +191,21 @@ $(".local-back").click(function() {
 })
 
 $("#update-button").click(function() {
-  $("#additional-information").show();
-  $("#update-button").hide();
+  var oauthId = $("#oauth-id").html();
+  if (!oauthId) oauthId = localStorage.id;
+  $.get(`/users/${oauthId}`)
+    .then(function(user) {
+      $("#user-name").val(user.name);
+      $("#user-address").val(user.address);
+      $("#user-city").val(user.city);
+      $("#user-state").val(user.state);
+      $("#user-zip").val(user.zip);
+      $("#preferred-animal").val(user.preferred_animal);
+      $("#user-shelter").val(user.shelter.toString());
+
+      $("#additional-information").show();
+      $("#update-button").hide();
+    })
 })
 
 $(".update-back").click(function() {
@@ -199,6 +226,14 @@ $(".edit-shelter-button").click(function() {
       localStorage.shelter = user.shelterId
       $.get(`/shelters/${user.shelterId}`)
         .then(function(shelter) {
+          $("#shelter-u-name").val(shelter.name);
+          $("#shelter-u-address").val(shelter.address);
+          $("#shelter-u-city").val(shelter.city);
+          $("#shelter-u-state").val(shelter.state);
+          $("#shelter-u-zip").val(shelter.zip);
+          $("#shelter-u-description").val(shelter.description);
+          $("#shelter-u-phone").val(shelter.phone);
+          $("#shelter-u-email").val(shelter.email);
           $(".edit-shelter-button").hide();
           $("#shelter-update").show();
         })
@@ -342,6 +377,8 @@ $("#get-user").click(function() {
   })
 })
 
+petTemplate = _.template($("#pet-template").html());
+
 $("#show-pets-button").click(function() {
   $.get(`/shelters/${localStorage.shelter}/pets`)
     .then(function(data) {
@@ -349,13 +386,99 @@ $("#show-pets-button").click(function() {
         $("#errors").html(`Error: ${data.error}`);
       }
       else {
-        names = [];
+        $("#pet-block").html('');
         data.forEach(function(pet) {
-          names.push(pet.name);
-        })
+          $("#pet-block").append(petTemplate(pet));
+          $(`#${pet._id}-u-pet-name`).val(pet.name);
+          $(`#${pet._id}-u-pet-animal`).val(pet.animal);
+          $(`#${pet._id}-u-pet-breed`).val(pet.breed);
+          $(`#${pet._id}-u-pet-size`).val(pet.size);
+          $(`#${pet._id}-u-pet-sex`).val(pet.sex);
+          $(`#${pet._id}-u-pet-age`).val(pet.age);
+
+          $(`#${pet._id}-submit`).click(function() {
+            var name = $(`#${pet._id}-u-pet-name`).val();
+            var animal = $(`#${pet._id}-u-pet-animal`).val();
+            var breed = $(`#${pet._id}-u-pet-breed`).val();
+            var size = $(`#${pet._id}-u-pet-size`).val();
+            var sex = $(`#${pet._id}-u-pet-sex`).val();
+            var age = $(`#${pet._id}-u-pet-age`).val();
+
+            $.ajax({
+              url: `/shelters/${localStorage.shelter}/pets/${pet._id}`,
+              type: "patch",
+              dataType: "json",
+              data: {
+                name: name,
+                animal: animal,
+                breed: breed,
+                size: size,
+                sex: sex,
+                age: age
+              }
+            })
+            .then(function(data) {
+              if(data.error) {
+                $("#errors").html(`Error: ${data.error}`);
+              }
+              else {
+                //update pet list
+                $.get(`/shelters/${localStorage.shelter}/pets/${pet._id}`)
+                .then(function(newpet) {
+                  if (newpet.error) {
+                    $("#errors").html(`Error: ${newpet.error}`);
+                  }
+                  else {
+                    //show updated data
+                    $(`#${pet._id}-container`).html(`${newpet.name} ${newpet.breed} ${newpet.animal} ${newpet.size} ${newpet.sex} ${newpet.age}`)
+                    $(`#${pet._id}-u-pet-name`).val(newpet.name);
+                    $(`#${pet._id}-u-pet-animal`).val(newpet.animal);
+                    $(`#${pet._id}-u-pet-breed`).val(newpet.breed);
+                    $(`#${pet._id}-u-pet-size`).val(newpet.size);
+                    $(`#${pet._id}-u-pet-sex`).val(newpet.sex);
+                    $(`#${pet._id}-u-pet-age`).val(newpet.age);
+                  };
+                });
+              };
+            });
+            $("#errors").html('');
+            $(`#${pet._id}-edit`).show();
+            $(`#${pet._id}-update`).hide();
+            $(`#${pet._id}-back`).hide();
+          }); //end of submit click event
+          $(`#${pet._id}-delete`).click(function() {
+            $.ajax({
+              url: `/shelters/${localStorage.shelter}/pets/${pet._id}`,
+              type: "delete"
+            })
+            .then(function(data) {
+              if(data.error) {
+                $("#errors").html(`Error: ${data.error}`);
+              }
+              else {
+                //update pet list
+                $(`#${pet._id}-list`).hide();
+              };
+            });
+            $("#errors").html('');
+            $(`#${pet._id}-edit`).show();
+            $(`#${pet._id}-update`).hide();
+            $(`#${pet._id}-back`).hide();
+          }); //end of delete click event
+          
+          $(`#${pet._id}-edit`).click(function() {
+            $(`#${pet._id}-update`).show();
+            $(`#${pet._id}-back`).show();
+            $(`#${pet._id}-edit`).hide();
+          })
+          $(`#${pet._id}-back`).click(function() {
+            $(`#${pet._id}-edit`).show();
+            $(`#${pet._id}-update`).hide();
+            $(`#${pet._id}-back`).hide();
+          })
+        }); //end of for each
         $("#errors").html('');
         $("#show-pets-button").hide();
-        $("#pet-block").html(names);
         $("#pet-div").show();
       }
     })
@@ -364,4 +487,6 @@ $("#show-pets-button").click(function() {
 $(".show-pets-back").click(function() {
   $("#pet-div").hide();
   $("#show-pets-button").show();
+})
+
 })

@@ -52,7 +52,15 @@
             <input type="text" id="user-city" placeholder="city">
             <input type="text" id="user-state" placeholder="state">
             <input type="number" id="user-zip" placeholder="zip">
-            <input type="text" id="preferred-animal" placeholder="preferred animal">
+            <select name="animal" id="preferred-animal">
+              <option value=" ">animal</option>
+              <option value="cat">Cat</option>
+              <option value="dog">Dog</option>
+              <option value="bird">Bird</option>
+              <option value="reptile">Reptile</option>
+              <option value="small">Small Critters</option>
+              <option value="large">Large Critters</option>
+            </select>
             <input type="checkbox" name="shelter" id="user-shelter" value="">Shelter<br>
             <$ if (user) { $>
               <div class="hidden" id="oauth-id"><$= user.id $></div>
@@ -119,7 +127,7 @@
             <button class="nav-submit pet-back right">Back</button>
             <input type="text" id="pet-name" placeholder="name" autofocus>
             <select name="animal" id="pet-animal">
-              <option value="">animal</option>
+              <option value=" ">animal</option>
               <option value="cat">Cat</option>
               <option value="dog">Dog</option>
               <option value="bird">Bird</option>
@@ -129,14 +137,14 @@
             </select>
             <input type="text" id="pet-breed" placeholder="breed">
             <select name="size" id="pet-size">
-              <option value="">size</option>
+              <option value=" ">size</option>
               <option value="small">Small</option>
               <option value="medium">Medium</option>
               <option value="large">Large</option>
               <option value="xl">X-Large</option>
             </select>
             <select name="sex" id="pet-sex">
-              <option value="">gender</option>
+              <option value=" ">gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -154,45 +162,27 @@
 
           <div class="nav-form hidden" id="pet-div">
             <button class="nav-submit show-pets-back right">Back</button><br>
-            <div class="nav-form" id="pet-block"></div>
+            <div class="nav-list" id="pet-block"></div>
           </div>
         </ul>
 
       </div>
     </nav>
     <div id="floating-panel">
-  <input id="address" type="textbox" value=" ">
-  <input id="submit" type="button" value="Location">
-</div>
+      <input id="address" type="textbox" placeholder="Search Location" value=" " autofocus>
+      <input class="nav-submit" id="submit" type="button" value="Search Location">
+    </div>
   </div>
 
   <div id="errors"></div>
   <div id="results"></div>
 
-  <$ if (shelter) { $>
-    <div><$=shelter$></div>
-  <$ } $>
-
-  <$ if (user) { $>
-    <div><$=user$></div>
-  <$ } $>
-  <div class="row">
-    <div class="col s2">
-      <div class="input-field">
-        <input id="search" type="search" placeholder="search name">
-        <i class="material-icons">close</i>
-      </div>
-    </div>
-
-
     <div class="col s6">
       <button id="get-users">Get Users</button>
+      <button id="get-user">Get User</button>
       <div id="users"></div>
     </div>
 
-    <div>
-      <button id="get-user">Get User</button>
-    </div>
 
   </div>
 
@@ -225,12 +215,48 @@
  </script>
 
 
-
+  <script type="text/template" id="pet-template">
+    <div class="pet-list" id="<%= _id %>-list">
+      <div class="pet-container" id="<%= _id %>-container">
+        <%= name %> <%= breed %> <%= animal %> <%= size %> <%= sex %> <%= age %>
+      </div>
+      <button class="nav-submit update-pet-back hidden" id="<%= _id %>-back">Back</button>
+      <button class="nav-submit edit-pet" id="<%= _id %>-edit">Edit</button>
+      <button class="nav-submit delete-pet" id="<%= _id %>-delete">Delete</button>
+      <div class="nav-list hidden update-pet" id="<%= _id %>-update">
+        <input type="text" class="u-pet-name" id="<%= _id %>-u-pet-name" placeholder="name" autofocus>
+        <select name="animal" class="u-pet-animal" id="<%= _id %>-u-pet-animal">
+          <option value=" ">animal</option>
+          <option value="cat">Cat</option>
+          <option value="dog">Dog</option>
+          <option value="bird">Bird</option>
+          <option value="reptile">Reptile</option>
+          <option value="small">Small Critters</option>
+          <option value="large">Large Critters</option>
+        </select>
+        <input type="text" class="u-pet-breed" id="<%= _id %>-u-pet-breed" placeholder="breed">
+        <select name="size" class="u-pet-size" id="<%= _id %>-u-pet-size">
+          <option value=" ">size</option>
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+          <option value="xl">X-Large</option>
+        </select>
+        <input type="number" class="u-pet-age" id="<%= _id %>-u-pet-age" placeholder="age">
+        <select name="sex" class="u-pet-sex" id="<%= _id %>-u-pet-sex">
+          <option value=" ">gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <button class="nav-submit u-pet-submit" id="<%= _id %>-submit">Update Pet</button>
+      </div>
+    </div>
+  </script>
 
 
 
   <!-- jQuery (required by Materialize) -->
-  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
   <!-- Using Underscore for collection manipulation and client-side templatin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <!-- JavaScript for Materialize -->
