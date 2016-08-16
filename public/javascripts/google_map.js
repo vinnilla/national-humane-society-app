@@ -6,9 +6,15 @@
   var infowindow = new google.maps.InfoWindow();
   var latlng = new google.maps.LatLng(37.09024, -95.712891);
   var mapOptions = {
+    disableDefaultUI: false,
     zoom: 5,
     center: latlng,
+    zoomControl: true,
+    zoomControlOptions:{
+        position: google.maps.ControlPosition.RIGTH_BOTTOM
+    },
     mapTypeId: google.maps.MapTypeId.ROADMAP
+
   }
   var geocoder = new google.maps.Geocoder();
   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -104,7 +110,6 @@ document.getElementById('submit').addEventListener('click', function() {
     }
   }
   theNext();
-
 
 
 
