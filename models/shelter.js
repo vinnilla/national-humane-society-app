@@ -12,10 +12,15 @@ var petSchema = new mongoose.Schema ({
 
 var shelterSchema = new mongoose.Schema({
   name: String,
-  location: String,
+  address: String,
+  city: String,
+  state: String,
+  zip: Number,
   pets: [petSchema],
   description: String,
-  contact_info: String
+  phone: String,
+  email: String,
+  userId: String
 });
 
 

@@ -7,7 +7,7 @@ var shelterController = require('../controllers/shelters');
 
 // The root route renders our only view
 router.get('/', function(req, res) {
-  res.render('index', { user: req.user });
+  res.render('index', { user: req.user, google_map_key: process.env.GOOGLE_MAPS_KEY, shelter: req.shelter });
 });
 
 // Google OAuth login route
@@ -38,10 +38,15 @@ router.post('/login', authController.login);
 router.post('/register', authController.register);
 
 // shelter
-router.get('/shelter', shelterController.index);
-router.get('shelter/:id', shelterController.show);
-router.post('/shelter', shelterController.create);
-router.patch('/shelter/:id', shelterController.update);
-router.delete('/shelter/:id', shelterController.delete);
+router.get('/shelters', shelterController.index);
+router.get('/shelters/:id', shelterController.show);
+router.post('/users/:user_id/shelters', shelterController.create);
+router.patch('/shelters/:id', shelterController.update);
+router.delete('/shelters/:id', shelterController.delete);
+
+router.patch('/shelters/:id/pet', shelterController.newpet);
+router.get('/shelters/:id/pets', shelterController.showpets);
+// router.delete('/shelters/:id/pets/:id', shelterController.deletepet);
+
 
 module.exports = router;
