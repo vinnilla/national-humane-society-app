@@ -7,7 +7,7 @@ var petSchema = new mongoose.Schema ({
   breed: String,
   size: String,
   sex: String,
-  age: Number
+  age: String,
 })
 
 var shelterSchema = new mongoose.Schema({
