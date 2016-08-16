@@ -48,6 +48,7 @@ html, body {
 #map {
   height: 100%;
 }
+
 #floating-panel {
   position: absolute;
   top: 10px;
@@ -60,6 +61,7 @@ html, body {
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
   padding-left: 10px;
+}
 
 }
 
@@ -68,5 +70,9 @@ select {
 	background-color: black;
 	border: black;
 	margin-left: -10px;
+}
+
+#pet-div {
+  width: 1000px;
 }
 
