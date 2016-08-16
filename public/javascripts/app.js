@@ -321,7 +321,6 @@ $("#submit-pet").click(function() {
 
 })
 
-
 $("#logout").click(function () {
   $("#login-button").show();
   $("#register-button").show();
