@@ -415,6 +415,26 @@ $("#show-pets-button").click(function() {
             $(`#${pet._id}-update`).hide();
             $(`#${pet._id}-back`).hide();
           }); //end of submit click event
+          $(`#${pet._id}-delete`).click(function() {
+            $.ajax({
+              url: `/shelters/${localStorage.shelter}/pets/${pet._id}`,
+              type: "delete"
+            })
+            .then(function(data) {
+              if(data.error) {
+                $("#errors").html(`Error: ${data.error}`);
+              }
+              else {
+                //update pet list
+                $(`#${pet._id}-list`).hide();
+              };
+            });
+            $("#errors").html('');
+            $(`#${pet._id}-edit`).show();
+            $(`#${pet._id}-update`).hide();
+            $(`#${pet._id}-back`).hide();
+          }); //end of delete click event
+          
           $(`#${pet._id}-edit`).click(function() {
             $(`#${pet._id}-update`).show();
             $(`#${pet._id}-back`).show();
