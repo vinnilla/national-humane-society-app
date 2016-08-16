@@ -7,7 +7,7 @@ var shelterController = require('../controllers/shelters');
 
 // The root route renders our only view
 router.get('/', function(req, res) {
-  res.render('index', { user: req.user, map_url: process.env.GOOGLE_MAPS_KEY, shelter: req.shelter });
+  res.render('index', { user: req.user, google_map_key: process.env.GOOGLE_MAPS_KEY, shelter: req.shelter });
 });
 
 // Google OAuth login route
