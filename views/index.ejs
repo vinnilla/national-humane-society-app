@@ -39,7 +39,7 @@
 
           <div class="nav-form hidden" id="login">
             <button class="nav-submit local-back right">Back</button>
-            <input type="email" id="login-email" placeholder="email" autofocus> 
+            <input type="email" id="login-email" placeholder="email" autofocus>
             <input type="password" id="login-password" placeholder="password">
             <button class="nav-submit" id="submit-login">Login</button>
           </div>
@@ -74,7 +74,7 @@
             <input type="email" id="register-email" placeholder="email" autofocus>
             <input type="password" id="register-password" placeholder="password">
             <input type="password" id="confirm-password" placeholder="confirm password">
-            <button class="nav-submit" id="submit-register">Register</button>  
+            <button class="nav-submit" id="submit-register">Register</button>
           </div>
 
           <div class="nav-form hidden" id="shelter-information">
@@ -92,7 +92,7 @@
         </ul>
 
         <ul class="right">
-          <$ if (user) { 
+          <$ if (user) {
                 if (user.shelterId) {$>
           <button class="nav-button" id="pet-button">Pet</button>
           <$ }} $>
@@ -108,7 +108,7 @@
               <option value="bird">Bird</option>
               <option value="reptile">Reptile</option>
               <option value="small">Small Critters</option>
-              <option value="large">Large Critters</option>              
+              <option value="large">Large Critters</option>
             </select>
             <input type="text" id="pet-breed" placeholder="breed">
             <select name="size" id="pet-size">
@@ -138,7 +138,7 @@
 
   <div id="errors"></div>
   <div id="results"></div>
-    
+
 
 
   <div class="row">
@@ -172,10 +172,11 @@
 
 <div id="map"></div>
 
-<!-- Replace the value of the key parameter with your own API key. -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=<$= google_map_key $>&callback=initMap">
-</script>
 
+<!-- Replace the value of the key parameter with your own API key. -->
+
+ <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=<$= google_map_key $>">
+ </script>
 
 
 
