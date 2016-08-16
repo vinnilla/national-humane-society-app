@@ -3,6 +3,7 @@ $(document).ready(function() {
 console.log('document loaded');
 
 $("#submit-register").click(function () {
+  // grab data from html form
   var email = $("#register-email").val()
   var password = $("#register-password").val()
   var confirmPassword = $("#confirm-password").val()
@@ -11,6 +12,8 @@ $("#submit-register").click(function () {
     $("#errors").html("Passwords do not match")
     return false; // this will end the callback execution
   }
+
+  // create a new user in database
   $.post("/register", {
     email: email,
     password: password
@@ -21,9 +24,10 @@ $("#submit-register").click(function () {
     else {
       $("#errors").html('');
       $("#results").html(data.msg)
-      $("#login").show();
       $("#oauth").show();
       $("#register").hide();
+      $("#register-button").show();
+      $("#login-button").show();
     }
   })
 })
@@ -47,6 +51,7 @@ $("#submit-login").click(function () {
       localStorage.id = data.id
       $.get(`/users/${localStorage.id}`)
         .then(function(user) {
+          // has shelter
           if (user.shelterId) {
             localStorage.shelter = user.shelterId;
             $(".edit-shelter-button").show();
@@ -54,10 +59,14 @@ $("#submit-login").click(function () {
             $("#show-pets-button").show();
           }
           else {
-            $("#shelter-button").show();
+            // option to create a shelter
+            if (user.shelter) {
+              $("#shelter-button").show();
+            }
           }
           $("#errors").html('');
-          $("#results").html(`JWT: ${data.token}`);
+          $("#results").html('');
+          // $("#results").html(`JWT: ${data.token}`);
           $("#oauth").hide();
           $("#login").hide();
           $("#local-logout").show();
@@ -75,6 +84,7 @@ $("#submit-update").click(function() {
   var zip = $("#user-zip").val();
   var animal = $("#preferred-animal").val();
   var shelter = $("#user-shelter").val();
+  
   var oauthId = $("#oauth-id").html();
   if (!oauthId) oauthId = localStorage.id;
 
@@ -181,8 +191,21 @@ $(".local-back").click(function() {
 })
 
 $("#update-button").click(function() {
-  $("#additional-information").show();
-  $("#update-button").hide();
+  var oauthId = $("#oauth-id").html();
+  if (!oauthId) oauthId = localStorage.id;
+  $.get(`/users/${oauthId}`)
+    .then(function(user) {
+      $("#user-name").val(user.name);
+      $("#user-address").val(user.address);
+      $("#user-city").val(user.city);
+      $("#user-state").val(user.state);
+      $("#user-zip").val(user.zip);
+      $("#preferred-animal").val(user.preferred_animal);
+      $("#user-shelter").val(user.shelter.toString());
+
+      $("#additional-information").show();
+      $("#update-button").hide();
+    })
 })
 
 $(".update-back").click(function() {
@@ -203,6 +226,14 @@ $(".edit-shelter-button").click(function() {
       localStorage.shelter = user.shelterId
       $.get(`/shelters/${user.shelterId}`)
         .then(function(shelter) {
+          $("#shelter-u-name").val(shelter.name);
+          $("#shelter-u-address").val(shelter.address);
+          $("#shelter-u-city").val(shelter.city);
+          $("#shelter-u-state").val(shelter.state);
+          $("#shelter-u-zip").val(shelter.zip);
+          $("#shelter-u-description").val(shelter.description);
+          $("#shelter-u-phone").val(shelter.phone);
+          $("#shelter-u-email").val(shelter.email);
           $(".edit-shelter-button").hide();
           $("#shelter-update").show();
         })

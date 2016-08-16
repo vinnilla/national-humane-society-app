@@ -51,7 +51,15 @@
             <input type="text" id="user-city" placeholder="city">
             <input type="text" id="user-state" placeholder="state">
             <input type="number" id="user-zip" placeholder="zip">
-            <input type="text" id="preferred-animal" placeholder="preferred animal">
+            <select name="animal" id="preferred-animal">
+              <option value=" ">animal</option>
+              <option value="cat">Cat</option>
+              <option value="dog">Dog</option>
+              <option value="bird">Bird</option>
+              <option value="reptile">Reptile</option>
+              <option value="small">Small Critters</option>
+              <option value="large">Large Critters</option>
+            </select>
             <input type="checkbox" name="shelter" id="user-shelter" value="">Shelter<br>
             <$ if (user) { $>
               <div class="hidden" id="oauth-id"><$= user.id $></div>
