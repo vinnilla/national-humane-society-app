@@ -112,7 +112,7 @@ function newpet(req, res, next) {
       pet = {};
       if(req.body.name) pet.name = req.body.name;
       if(req.body.animal) pet.animal = req.body.animal;
-      if(req.body.breed) pet.breed = req.body.breed; 
+      if(req.body.breed) pet.breed = req.body.breed;
       if(req.body.size) pet.size = req.body.size;
       if(req.body.sex) pet.sex = req.body.sex;
       if(req.body.age) pet.age = req.body.age;
@@ -152,3 +152,4 @@ module.exports = {
   delete: destroy,
   showpets: showpets
 }
+
