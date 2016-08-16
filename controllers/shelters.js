@@ -100,10 +100,55 @@ function destroy(req, res, next) {
   });
 };
 
+function newpet(req, res, next) {
+  Shelter.findById(req.params.id, function(err, shelter) {
+    if (err) {
+      res.json({message: `Could not find user because ${err}`});
+    }
+    else if (!shelter) {
+      res.json({message: `No shelter with id ${req.params.id}`});
+    }
+    else {
+      pet = {};
+      if(req.body.name) pet.name = req.body.name;
+      if(req.body.animal) pet.animal = req.body.animal;
+      if(req.body.breed) pet.breed = req.body.breed; 
+      if(req.body.size) pet.size = req.body.size;
+      if(req.body.sex) pet.sex = req.body.sex;
+      if(req.body.age) pet.age = req.body.age;
+      shelter.pets.push(pet);
+      shelter.save(function(err, shelter) {
+        if (err) {
+          res.json({message: err});
+        }
+        else {
+          res.json(shelter);
+        }
+      });
+    };
+  });
+};
+
+function showpets(req, res, next) {
+  Shelter.findById(req.params.id, function(err, shelter) {
+    if (err) {
+      res.json({message: `Could not find user because ${err}`});
+    }
+    else if (!shelter) {
+      res.json({message: `No shelter with id ${req.params.id}`});
+    }
+    else {
+      res.json(shelter.pets);
+    };
+  });
+};
+
 module.exports = {
   index: index,
   show: show,
   create: create,
   update: update,
-  delete: destroy
+  newpet: newpet,
+  delete: destroy,
+  showpets: showpets
 }

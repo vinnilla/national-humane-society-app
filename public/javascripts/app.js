@@ -47,6 +47,7 @@ $("#submit-login").click(function () {
             localStorage.shelter = user.shelterId;
             $(".edit-shelter-button").show();
             $("#pet-button").show();
+            $("#show-pets-button").show();
           }
           else {
             $("#shelter-button").show();
@@ -273,6 +274,7 @@ $("#submit-shelter").click(function() {
   $("#shelter-information").hide();
   $("#shelter-button").show();
   $("#pet-button").show();
+  $("#show-pets-button").show();
 })
 
 $("#pet-button").click(function() {
@@ -286,8 +288,37 @@ $(".pet-back").click(function() {
 })
 
 $("#submit-pet").click(function() {
-  $("#pet-information").hide();
-  $("#pet-button").show();
+  var name = $("#pet-name").val();
+  var animal = $("#pet-animal").val();
+  var breed = $("#pet-breed").val();
+  var size = $("#pet-size").val();
+  var sex = $("#pet-sex").val();
+  var age = $("#pet-age").val();
+
+  $.ajax({
+    url: `/shelters/${localStorage.shelter}/pet`,
+    type: "patch",
+    dataType: "json",
+    data: {
+      name: name,
+      animal: animal,
+      breed: breed,
+      size: size,
+      sex: sex,
+      age: age
+    }
+  })
+  .then(function(data) {
+    if(data.error) {
+      $("#errors").html(`Error: ${data.error}`);
+    }
+    else {
+      $("#errors").html('');
+      $("#pet-information").hide();
+      $("#pet-button").show();
+    }
+  })
+
 })
 
 
@@ -310,4 +341,28 @@ $("#get-user").click(function() {
   .then(function (user) {
     $("#users").html(JSON.stringify(user))
   })
+})
+
+$("#show-pets-button").click(function() {
+  $.get(`/shelters/${localStorage.shelter}/pets`)
+    .then(function(data) {
+      if (data.error) {
+        $("#errors").html(`Error: ${data.error}`);
+      }
+      else {
+        names = [];
+        data.forEach(function(pet) {
+          names.push(pet.name);
+        })
+        $("#errors").html('');
+        $("#show-pets-button").hide();
+        $("#pet-block").html(names);
+        $("#pet-div").show();
+      }
+    })
+})
+
+$(".show-pets-back").click(function() {
+  $("#pet-div").hide();
+  $("#show-pets-button").show();
 })
