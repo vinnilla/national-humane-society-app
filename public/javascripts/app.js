@@ -1,3 +1,7 @@
+$(document).ready(function() {
+
+console.log('document loaded');
+
 $("#submit-register").click(function () {
   var email = $("#register-email").val()
   var password = $("#register-password").val()
@@ -342,6 +346,8 @@ $("#get-user").click(function() {
   })
 })
 
+petTemplate = _.template($("#pet-template").html());
+
 $("#show-pets-button").click(function() {
   $.get(`/shelters/${localStorage.shelter}/pets`)
     .then(function(data) {
@@ -349,13 +355,79 @@ $("#show-pets-button").click(function() {
         $("#errors").html(`Error: ${data.error}`);
       }
       else {
-        names = [];
+        $("#pet-block").html('');
         data.forEach(function(pet) {
-          names.push(pet.name);
-        })
+          $("#pet-block").append(petTemplate(pet));
+          $(`#${pet._id}-u-pet-name`).val(pet.name);
+          $(`#${pet._id}-u-pet-animal`).val(pet.animal);
+          $(`#${pet._id}-u-pet-breed`).val(pet.breed);
+          $(`#${pet._id}-u-pet-size`).val(pet.size);
+          $(`#${pet._id}-u-pet-sex`).val(pet.sex);
+          $(`#${pet._id}-u-pet-age`).val(pet.age);
+
+          $(`#${pet._id}-submit`).click(function() {
+            var name = $(`#${pet._id}-u-pet-name`).val();
+            var animal = $(`#${pet._id}-u-pet-animal`).val();
+            var breed = $(`#${pet._id}-u-pet-breed`).val();
+            var size = $(`#${pet._id}-u-pet-size`).val();
+            var sex = $(`#${pet._id}-u-pet-sex`).val();
+            var age = $(`#${pet._id}-u-pet-age`).val();
+
+            $.ajax({
+              url: `/shelters/${localStorage.shelter}/pets/${pet._id}`,
+              type: "patch",
+              dataType: "json",
+              data: {
+                name: name,
+                animal: animal,
+                breed: breed,
+                size: size,
+                sex: sex,
+                age: age
+              }
+            })
+            .then(function(data) {
+              if(data.error) {
+                $("#errors").html(`Error: ${data.error}`);
+              }
+              else {
+                //update pet list
+                $.get(`/shelters/${localStorage.shelter}/pets/${pet._id}`)
+                .then(function(newpet) {
+                  if (newpet.error) {
+                    $("#errors").html(`Error: ${newpet.error}`);
+                  }
+                  else {
+                    //show updated data
+                    $(`#${pet._id}-container`).html(`${newpet.name} ${newpet.breed} ${newpet.animal} ${newpet.size} ${newpet.sex} ${newpet.age}`)
+                    $(`#${pet._id}-u-pet-name`).val(newpet.name);
+                    $(`#${pet._id}-u-pet-animal`).val(newpet.animal);
+                    $(`#${pet._id}-u-pet-breed`).val(newpet.breed);
+                    $(`#${pet._id}-u-pet-size`).val(newpet.size);
+                    $(`#${pet._id}-u-pet-sex`).val(newpet.sex);
+                    $(`#${pet._id}-u-pet-age`).val(newpet.age);
+                  };
+                });
+              };
+            });
+            $("#errors").html('');
+            $(`#${pet._id}-edit`).show();
+            $(`#${pet._id}-update`).hide();
+            $(`#${pet._id}-back`).hide();
+          }); //end of submit click event
+          $(`#${pet._id}-edit`).click(function() {
+            $(`#${pet._id}-update`).show();
+            $(`#${pet._id}-back`).show();
+            $(`#${pet._id}-edit`).hide();
+          })
+          $(`#${pet._id}-back`).click(function() {
+            $(`#${pet._id}-edit`).show();
+            $(`#${pet._id}-update`).hide();
+            $(`#${pet._id}-back`).hide();
+          })
+        }); //end of for each
         $("#errors").html('');
         $("#show-pets-button").hide();
-        $("#pet-block").html(names);
         $("#pet-div").show();
       }
     })
@@ -364,4 +436,6 @@ $("#show-pets-button").click(function() {
 $(".show-pets-back").click(function() {
   $("#pet-div").hide();
   $("#show-pets-button").show();
+})
+
 })

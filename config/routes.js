@@ -46,7 +46,9 @@ router.delete('/shelters/:id', shelterController.delete);
 
 router.patch('/shelters/:id/pet', shelterController.newpet);
 router.get('/shelters/:id/pets', shelterController.showpets);
-// router.delete('/shelters/:id/pets/:id', shelterController.deletepet);
+router.get('/shelters/:shelter_id/pets/:id', shelterController.showpet);
+router.patch('/shelters/:shelter_id/pets/:id', shelterController.editpet);
+router.delete('/shelters/:shelter_id/pets/:id', shelterController.deletepet);
 
 
 module.exports = router;

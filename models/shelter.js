@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 
 
 var petSchema = new mongoose.Schema ({
-  name: String,
+  name: {type:String, default: 'Soba'},
   animal: String,
-  breed: String,
+  breed: {type:String, default: ' '},
   size: String,
   sex: String,
-  age: String,
+  age: {type:Number, default: 0}
 })
 
 var shelterSchema = new mongoose.Schema({

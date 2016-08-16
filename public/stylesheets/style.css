@@ -13,19 +13,23 @@
 .nav-button, .nav-submit {
 	background-color: rgba(0,0,0,0);
 	border: solid 0px;
+  color: white;
 }
 
 .nav-button {
 	margin: 0 20px;
 }
 
-.nav-form {
+.nav-form, .nav-list {
 	color: white;
 	background-color: black;
 	border-width: 0px 20px 5px 20px;
 	border-style: solid;
 	border-color: black;
-	width: 400px;
+}
+
+.nav-form {
+  width: 400px;
 }
 
 #user-shelter {
@@ -54,15 +58,13 @@ html, body {
   top: 10px;
   left: 25%;
   z-index: 5;
-  background-color: #fff;
+  background-color: rgba(0,0,0,0);
   padding: 5px;
-  border: 1px solid #999;
+  border: 1px solid rgba(0,0,0,0);
   text-align: center;
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
   padding-left: 10px;
-}
-
 }
 
 select {
@@ -76,3 +78,30 @@ select {
   width: 1000px;
 }
 
+#address {
+  background-color: rgba(0,0,0,0);
+  color: white;
+  border: black;
+  border-bottom: solid 1px white;
+}
+
+#get-users, #get-user, .edit-pet, .delete-pet, .pet-container {
+  display: inline;
+}
+
+.u-pet-name, .u-pet-animal, .u-pet-breed, .u-pet-size, .u-pet-sex, .u-pet-age {
+  display:inline !important;
+  width: 300px !important;
+}
+
+.u-pet-submit {
+  display:block;
+}
+
+.edit-pet, .delete-pet, .update-pet-back {
+  text-decoration: underline;
+}
+
+.edit-pet, .update-pet-back {
+  margin-left: 20px;
+}
