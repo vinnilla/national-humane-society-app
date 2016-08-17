@@ -113,3 +113,31 @@ select {
 .edit-pet, .update-pet-back {
   margin-left: 20px;
 }
+
+p {
+  display: inline;
+}
+
+#n {
+  color: red;
+}
+
+#a {
+  color: orange;
+}
+
+#d {
+  color: yellow;
+}
+
+#o {
+  color: lightgreen;
+}
+
+#p {
+  color: lightblue;
+}
+
+#t {
+  color: violet;
+}

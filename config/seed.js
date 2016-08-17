@@ -1,8 +1,7 @@
 var mongoose = require('./database')
-var Shelter = require('./models/shelter')
-var Pet = require('../models/pet')
+var Shelter = require('../models/shelter')
 
-var pets = new mongoose.Schema[
+var pets = [
 { //0
   name: "Dragon",
   animal: "Cat",
@@ -43,7 +42,7 @@ var pets = new mongoose.Schema[
   size: "medium",
   sex: "Male",
   age: "Young"
-}
+},
 { //5
   name: "Salsa",
   animal: "Dog",
@@ -59,7 +58,7 @@ var pets = new mongoose.Schema[
   size: "Medium",
   sex: "Male",
   age: "Young"
-}
+},
 { //7
   name: "Mookie",
   animal: "Rabbit",
@@ -67,7 +66,7 @@ var pets = new mongoose.Schema[
   size: "Small",
   sex: "Female",
   age: "Adult"
-}
+},
 { //8
   name: "Ravi",
   animal: "Bird",
@@ -75,7 +74,7 @@ var pets = new mongoose.Schema[
   size: "Medium",
   sex: "Unknown",
   age: "Young"
-}
+},
 { //9
   name: "Shawn",
   animal: "Goat",
@@ -102,28 +101,28 @@ var shelters = new mongoose.Schema[
   pets: pets,
   description:"We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
   contact_info: "(818) 643-3989"
-}
+},
 { // 2
   name: "Animal Specialty Group Inc",
   location: "Los Angeles, CA 90030",
   pets: pets,
   description:"We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
   contact_info: "818-660-0684"
-}
+},
 { // 3
   name: "Animal Defenders International Inc",
   location: "Los Angeles, CA 90048",
   pets: pets,
   description:"We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
   contact_info: "323-935-2234"
-}
+},
 { // 4
   name: "Animal Adoption Solutions",
   location: "Santa Barbara, CA 93109",
   pets: pets,
   description:"We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
   contact_info: "805-259-7356"
-}
+},
 { // 5
   name: "Second Chance at Love Humane Society",
   location: "Templeton CA 93465",

@@ -2,6 +2,7 @@
 var Shelter = require("../models/shelter");
 var rp = require("request-promise");
 var User = require("../models/user");
+var imgur = require('imgur');
 
 function index(req, res, next) {
   Shelter.find({}, function(err, shelters) {
@@ -101,6 +102,7 @@ function destroy(req, res, next) {
 };
 
 function newpet(req, res, next) {
+  console.log(req.body.image);
   Shelter.findById(req.params.id, function(err, shelter) {
     if (err) {
       res.json({message: `Could not find user because ${err}`});
@@ -125,6 +127,24 @@ function newpet(req, res, next) {
           res.json(shelter);
         }
       });
+
+
+      if(req.body.image) {
+        imgur.uploadFile(image)
+        .then(function(json) {
+          console.log(json.data.link);
+          pet.image = json.data.link;
+          // shelter.pets.push(pet);
+          // shelter.save(function(err, shelter) {
+          //   if (err) {
+          //     res.json({message: err});
+          //   }
+          //   else {
+          //     res.json(shelter);
+          //   }
+          // });
+        });
+      }
     };
   });
 };
