@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 
+
 // load the env vars
 require('dotenv').load();
 
@@ -27,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 require('ejs').delimiter = '$';
 
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 // mount the session middleware
 app.use(session({
   secret: 'WDIRocks!',

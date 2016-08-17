@@ -8,13 +8,21 @@
   <!-- Materialize CSS Framework -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <link rel="stylesheet" href="stylesheets/style.css"/>
+  <link rel="icon" 
+      type="image/png" 
+      href="http://i.imgur.com/yyaH4ZF.jpg">
 </head>
 <body>
 
   <div class="navbar-fixed">
     <nav>
+<<<<<<< HEAD
       <div class="nav-wrapper"><img alt="Brand" src="http://www.sumopaint.com/images/temp/xzfjiaqlppagfpsj.png">
         <a href="/" class="brand-logo left">NADO<span>Pet</span></a>
+=======
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo left"> <p id="n">N</p><p id="a">A</p><p id="d">D</p><p id="o">O</p><p id="p">P</p><p id="e">e</p><p id="t">T</p></a>
+>>>>>>> vincent
         <ul class="right">
 
           <div id="oauth">
@@ -65,6 +73,7 @@
             <$ if (user) { $>
               <div class="hidden" id="oauth-id"><$= user.id $></div>
             <$ } $>
+              <div class="hidden" id="imgur-key"><$= imgur_key $></div>
             <button class="nav-submit" id="submit-update">Update</button>
           </div>
         </ul>
@@ -149,7 +158,9 @@
               <option value="female">Female</option>
             </select>
             <input type="number" id="pet-age" placeholder="age">
+            <input type="file" id="pet-image">
             <button class="nav-submit" id="submit-pet">New Pet</button>
+            <div id="test-image"></div>
           </div>
         </ul>
 
@@ -207,10 +218,21 @@
 
 </div>
 
+<div class="hidden" id="show-one-shelter">
+  <div id="show_shelter_name"></div>
+  <div id="shelter-address"></div>
+</div>
 
 <!-- Replace the value of the key parameter with your own API key. -->
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<$= google_map_key $>&callback=initMap">
  </script>
+
+  <script type="text/template" id="show-pet-template">
+    <div>
+      
+    </div>
+  </script>
+
 
   <script type="text/template" id="pet-template">
     <div class="pet-list" id="<%= _id %>-list">

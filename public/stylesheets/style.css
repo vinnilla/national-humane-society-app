@@ -119,7 +119,6 @@ select {
   margin-left: 20px;
 }
 
-
 .show-shelter-container {
   width: 500px;
   height: 500px;
@@ -242,7 +241,30 @@ a {
   background-color: #248cc9;
 }
 
+p {
+  display: inline;
+}
 
+#n {
+  color: red;
+}
 
+#a {
+  color: orange;
+}
 
+#d {
+  color: yellow;
+}
 
+#o {
+  color: lightgreen;
+}
+
+#p {
+  color: lightblue;
+}
+
+#t {
+  color: violet;
+}
