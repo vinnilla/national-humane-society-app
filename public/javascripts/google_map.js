@@ -54,14 +54,14 @@ document.getElementById('submit').addEventListener('click', function() {
     );
   }
 //
-  function preLoadGeocodeAddress(address, next) {
+  function preLoadGeocodeAddress(id, name, address, next) {
     geocoder.geocode({address:address}, function (results,status)
       {
          if (status == google.maps.GeocoderStatus.OK) {
           var p = results[0].geometry.location;
           var lat=p.lat();
           var lng=p.lng();
-          createMarker(address,lat,lng);
+          createMarker(id, name,lat,lng);
 
         }
         else {
@@ -76,7 +76,7 @@ document.getElementById('submit').addEventListener('click', function() {
     );
   }
   //create new marker and set the icon image
- function createMarker(add,lat,lng) {
+ function createMarker(id, add,lat,lng) {
    var contentString = add;
    var marker = new google.maps.Marker({
      position: new google.maps.LatLng(lat,lng),
@@ -85,13 +85,58 @@ document.getElementById('submit').addEventListener('click', function() {
            });
 //create a window on click with the information about the shelter to display and link to profile
   google.maps.event.addListener(marker, 'click', function() {
-     infowindow.setContent(contentString);
+     infowindow.setContent(`<button class="show_shelter" id='${id}''> ${contentString} </button>`);
      infowindow.open(map,marker);
-   });
+     $(".show_shelter").click(function() {
+      var shelter_id = $(".show_shelter").attr('id');
+      console.log(shelter_id)
+      $.get(`/shelters/${shelter_id}`)
+      .then(function(shelter){
+        $('#show_shelter_name').html(shelter.name);
+        $('#show_shelter_location').html(`<h1>${shelter.address}</h1><h2>${shelter.city}, ${shelter.state} - ${shelter.zip}</h2>`);
+        $('#show_shelter_contact').html(`Phone: ${shelter.phone} Email: ${shelter.email}`);
+       var showPetTemplate = _.template($('#show-pets-template').html());
+        $(`.show-shelter-all-pets`).html('');
+        shelter.pets.forEach(function(pet) {
+          $(".show-shelter-all-pets").append(showPetTemplate(pet));
+          $(`#${pet._id}-show-pet-name`).val(pet.name);
+          $(`#${pet._id}-show-pet-animal`).val(pet.animal);
+          $(`#${pet._id}-show-pet-breed`).val(pet.breed);
+          $(`#${pet._id}-show-pet-size`).val(pet.size);
+          $(`#${pet._id}-show-pet-sex`).val(pet.sex);
+          $(`#${pet._id}_show-pet-age`).val(pet.age);
+        })
+        $(".show-shelter-container").show();
+
+
+
+        })
+      })
+
+    });
 
    bounds.extend(marker.position);
 
- }
+ };
+
+
+
+var locations = [];
+var names = [];
+var ids = [];
+$.get('/shelters')
+  .then(function(shelters){
+    shelters.forEach(function(shelter) {
+      names.push(shelter.name);
+      locations.push(`${shelter.address} ${shelter.city} ${shelter.state} ${shelter.zip}`);
+      ids.push(shelter._id);
+      console.log(locations);
+    })
+  })
+  .then(function(data) {
+    theNext();
+  })
+
  //Example array to populate the map
   // var locations = [
   //          'temecula, US',
@@ -99,17 +144,17 @@ document.getElementById('submit').addEventListener('click', function() {
   //          'astoria NY, US',
   //          'las vegas, NV'
   // ];
+
   //Will set the next marker based on the location array
   var nextAddress = 0;
   function theNext() {
     if (nextAddress < locations.length) {
-      setTimeout('preLoadGeocodeAddress("'+locations[nextAddress]+'",theNext)', delay);
+      setTimeout('preLoadGeocodeAddress("'+ids[nextAddress]+'", "'+names[nextAddress]+'", "'+locations[nextAddress]+'",theNext)', delay);
       nextAddress++;
     } else {
       map.fitBounds(bounds);
     }
   }
-  theNext();
 
 
 

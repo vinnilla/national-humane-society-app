@@ -329,11 +329,57 @@ $("#submit-pet").click(function() {
   var size = $("#pet-size").val();
   var sex = $("#pet-sex").val();
   var age = $("#pet-age").val();
+  var img = document.createElement("img");
+  var imgur = $("#imgur-key").html();
+
+  var uploadedImage = $("#pet-image")[0].files[0];
+  // console.log(typeof uploadedImage);
+
+  img.src = window.URL.createObjectURL(uploadedImage);
+  img.height = 100;
+  $("#test-image").html(img);
+  console.log(img.src);
+
+  // var fileReader = new FileReader();
+  // var data = fileReader.readAsDataURL(uploadedImage)
+  // console.log(data);
+
+  // convert blob to data url
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext("2d");
+  context.drawImage(img, 0, 0);
+  var dataurl = canvas.toDataURL('image/jpeg');
+  // console.log(dataurl)
+  
+  var array = dataurl.split(",");
+  // console.log(array);
+  // var byte = atob(array[1]).toString(2);
+  // console.log(byte);
+  console.log(array[1])
+
+  //post to imgur
+  
+  // $.ajax({
+  //   url: "https://api.imgur.com/3/image",
+  //   type: "POST",
+  //   headers: {
+  //     Authorization: `Client-ID ${imgur}`,
+  //     Accept: "application/json"
+  //   },
+  //   data: {
+  //     image: window.atob(array[1]),
+  //     type: "base64"
+  //   },
+  //   success: function(result) {
+  //     console.log(result.data);
+  //     console.log(result.data.id);
+  //   }
+  // });
 
   $.ajax({
     url: `/shelters/${localStorage.shelter}/pet`,
     type: "patch",
-    dataType: "json",
+    dataType: 'json',
     data: {
       name: name,
       animal: animal,
@@ -351,10 +397,10 @@ $("#submit-pet").click(function() {
       $("#errors").html('');
       $("#pet-information").hide();
       $("#pet-button").show();
-    }
-  })
-
-})
+    };
+  }); //end of patch for pet
+  
+});
 
 $("#logout").click(function () {
   $("#login-button").show();
@@ -389,6 +435,8 @@ $("#show-pets-button").click(function() {
         $("#pet-block").html('');
         data.forEach(function(pet) {
           $("#pet-block").append(petTemplate(pet));
+
+
           $(`#${pet._id}-u-pet-name`).val(pet.name);
           $(`#${pet._id}-u-pet-animal`).val(pet.animal);
           $(`#${pet._id}-u-pet-breed`).val(pet.breed);
