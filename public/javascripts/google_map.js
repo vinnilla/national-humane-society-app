@@ -93,12 +93,12 @@ document.getElementById('submit').addEventListener('click', function() {
 
  }
  //Example array to populate the map
-  var locations = [
-           'temecula, US',
-           'los angeles, US',
-           'astoria NY, US',
-           'las vegas, NV'
-  ];
+  // var locations = [
+  //          'temecula, US',
+  //          'los angeles, US',
+  //          'astoria NY, US',
+  //          'las vegas, NV'
+  // ];
   //Will set the next marker based on the location array
   var nextAddress = 0;
   function theNext() {
