@@ -4,6 +4,7 @@
   <title>National Humane Society</title>
   <!-- Google Icon Fonts used by Materialize -->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Da" rel="stylesheet">
   <!-- Materialize CSS Framework -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <link rel="stylesheet" href="stylesheets/style.css"/>
@@ -12,9 +13,8 @@
 
   <div class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper">
-        <a href="/" class="brand-logo left" <img class="img-responsive2"
-        src="http://imgur.com/DVT6WdE">National Humane Society</a>
+      <div class="nav-wrapper"><img alt="Brand" src="http://www.sumopaint.com/images/temp/xzfjiaqlppagfpsj.png">
+        <a href="/" class="brand-logo left">NADO<span>Pet</span></a>
         <ul class="right">
 
           <div id="oauth">
@@ -165,7 +165,6 @@
             <div class="nav-list" id="pet-block"></div>
           </div>
         </ul>
-
       </div>
     </nav>
     <div id="floating-panel">
@@ -182,9 +181,8 @@
       <button id="get-user">Get User</button>
       <div id="users"></div>
     </div>
-
-
   </div>
+
 
   <!-- embed the current user's id -->
   <script>
@@ -213,7 +211,6 @@
 <!-- Replace the value of the key parameter with your own API key. -->
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<$= google_map_key $>&callback=initMap">
  </script>
-
 
   <script type="text/template" id="pet-template">
     <div class="pet-list" id="<%= _id %>-list">
@@ -264,7 +261,43 @@
   <script src="javascripts/app.js"></script>
   <script src="/javascripts/google_map.js" type="text/javascript"></script>
 
+<div class="row">
+  <div class="col-lg-12">
+    <ul class="mendi-social-networks">
+      <li class="facebook">
+      <a href="" title="">
+        <i class="fa fa-facebook"> </i>
+        <p>JOIN US ON FACEBOOK</p>
+        <span class="followers">268K Followers</span>
+      </a>
+    </li>
+    <li class="twitter">
+      <a href="" title="">
+        <i class="fa fa-twitter"> </i>
+        <p>FOLLOW US ON TWITTER</p>
+        <span class="followers">268K Followers</span>
+      </a>
+    </li>
+    <li class="googleplus">
+      <a href="" title="">
+        <i class="fa fa-google-plus"> </i>
+        <p>ADD TO OUR CIRCLE</p>
+        <span class="followers">268K Followers</span>
+      </a>
+    </li>
+    <li class="linkedin">
+      <a href="" title="">
+        <i class="fa fa-linkedin"> </i>
+        <p>CONNECT TO OUR NETWORK</p>
+        <span class="followers">268K Followers</span>
+      </a>
+    </li>
+  </ul>
+  </div>
+</div>
 
+  <footer>App createdy by Vincent Huang, Gustavo Ferreira, Fernand Tan <span>  &copy;2016 8amcrew</span>
+  </footer>
 
 </body>
 </html>

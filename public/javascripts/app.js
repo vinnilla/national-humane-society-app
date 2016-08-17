@@ -84,7 +84,7 @@ $("#submit-update").click(function() {
   var zip = $("#user-zip").val();
   var animal = $("#preferred-animal").val();
   var shelter = $("#user-shelter").val();
-  
+
   var oauthId = $("#oauth-id").html();
   if (!oauthId) oauthId = localStorage.id;
 
@@ -465,7 +465,7 @@ $("#show-pets-button").click(function() {
             $(`#${pet._id}-update`).hide();
             $(`#${pet._id}-back`).hide();
           }); //end of delete click event
-          
+
           $(`#${pet._id}-edit`).click(function() {
             $(`#${pet._id}-update`).show();
             $(`#${pet._id}-back`).show();
