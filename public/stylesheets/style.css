@@ -119,6 +119,23 @@ select {
   margin-left: 20px;
 }
 
+
+.show-shelter-container {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  left: 300px;
+  top: 300px;
+  background-color: white;
+}
+
+#show-shelter-pet, .show-shelter-all-pets {
+  width: 500px;
+  height: 200px;
+  background-color: black;
+  color: white;
+}
+
 footer {
   background: rgba(0,0,0,.9);
   text-align: center;
