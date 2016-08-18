@@ -295,7 +295,7 @@ p {
   z-index: 10;
   color: white;
   width: 55%;
-  margin: 0 auto 0 auto;
+  margin: 4% auto 0 auto;
   max-height: 85%;
   overflow: auto;
 }
@@ -368,4 +368,10 @@ body, html{
 
 #welcome-oauth {
   width: 100%;
+}
+
+.modal {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
