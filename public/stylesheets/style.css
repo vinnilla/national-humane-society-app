@@ -53,6 +53,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: black;
 }
 #map {
   height: 700px;
@@ -140,53 +141,51 @@ footer {
   text-align: center;
   font-size: 1em;
   color: white;
-  margin-top: 10px;
-  padding-top: 15px;
   padding-bottom: 15px;
+  border: 5px solid black;
   /*font-family: 'Baloo Da', cursive;*/
 }
+
 
 span {
   color: rgb(79, 216, 216)
 
 }
 
-.banner {
 
-  width: 100%;
-  height: 15%;
 
-  background-repeat: no-repeat;
-}
 
-.image {
-  width: 50%;
-  height: 50%;
 
-}
+
+/****** Information bars *******/
 
 a {
   font-family: 'Baloo Da', cursive;
+  font-size: 1em;
+  text-align: center;
 }
 
-/* footer links*/
-.mendi-social-networks {
+.row {
+  border: 2px black solid;
+}
+
+.pet-information {
     width: 100%;
     margin: 0;
 }
-.mendi-social-networks li {
+.pet-information li {
   float: left;
   display: inline;
   width: 25%;
   color: #ffffff;
-  position: relative;
+
 }
-.mendi-social-networks li i {
+.pet-information li i {
   font-size: 50px;
   float: left;
   width: 60px;
 }
-.mendi-social-networks li a {
+.pet-information li a {
   color: #ffffff;
   padding: 25px 65px 25px 40px;
   float: left;
@@ -194,20 +193,22 @@ a {
   box-sizing: border-box;
 
 }
-.mendi-social-networks li a:hover {
+.pet-information li a:hover {
      text-decoration:none;
+
 }
-.mendi-social-networks li p {
-  font-size: 13px;
+.pet-information li p {
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   margin: 2px 0 0px;
+
 }
-.mendi-social-networks li .followers {
+.pet-information li .followers {
   text-transform: uppercase;
 }
-.mendi-social-networks li:before {
+.pet-information li:before {
   position: absolute;
   content: "\f105";
   right: 30px;
@@ -215,7 +216,7 @@ a {
   bottom: 0;
   height: 30px;
   width: 30px;
-  border: 1px solid #ffffff;
+  border: 9px solid #ffffff;
   border-radius: 30px;
   margin: auto;
   font-size: 18px;
@@ -224,20 +225,20 @@ a {
   text-align: center;
   line-height: 26px;
 }
-.mendi-social-networks li:hover:before {
+.pet-information li:hover:before {
   background-color: #ffffff;
   color: #999999;
 }
-.mendi-social-networks li.facebook {
+.pet-information li.adoption {
   background-color: #4d6bab;
 }
-.mendi-social-networks li.twitter {
+.pet-information li.pet-care {
   background-color: #4ec6f8;
 }
-.mendi-social-networks li.googleplus {
+.pet-information li.volunteer {
   background-color: #d34836;
 }
-.mendi-social-networks li.linkedin {
+.pet-information li.personality {
   background-color: #248cc9;
 }
 
@@ -245,26 +246,3 @@ p {
   display: inline;
 }
 
-#n {
-  color: red;
-}
-
-#a {
-  color: orange;
-}
-
-#d {
-  color: yellow;
-}
-
-#o {
-  color: lightgreen;
-}
-
-#p {
-  color: lightblue;
-}
-
-#t {
-  color: violet;
-}
