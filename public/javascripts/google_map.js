@@ -93,17 +93,23 @@ document.getElementById('submit').addEventListener('click', function() {
       console.log(shelter_id)
       $.get(`/shelters/${shelter_id}`)
       .then(function(shelter){
-        $('#show_shelter_name').html(shelter.name);
-        $('#show_shelter_location').html(`<h1>${shelter.address}</h1><h2>${shelter.city}, ${shelter.state} - ${shelter.zip}</h2>`);
-        $('#show_shelter_contact').html(`Phone: ${shelter.phone} Email: ${shelter.email}`);
-       var showPetTemplate = _.template($('#show-pets-template').html());
-        $(`.show-shelter-all-pets`).html('');
+        console.log(shelter.name);
+        $('#show-shelter-name').html(`<h1>${shelter.name}</h1>`);
+        $('#show-shelter-location').html(`<h1>${shelter.address}</h1><h2>${shelter.city}, ${shelter.state} - ${shelter.zip}</h2>`);
+        $('#show-shelter-contact').html(`Phone: ${shelter.phone} Email: ${shelter.email}`);
+       var showPetTemplate = _.template($('#show-pet-template').html());
+        $('.show-shelter-all-pets').html('');
         shelter.pets.forEach(function(pet) {
           $(".show-shelter-all-pets").append(showPetTemplate(pet));
+          // $(`#${pet._id}-show-pet-name`).val(pet.name);
+          // $(`#${pet._id}-show-pet-animal`).val(pet.animal);
+          // $(`#${pet._id}-show-pet-breed`).val(pet.breed);
+          // $(`#${pet._id}-show-pet-size`).val(pet.size);
+          // $(`#${pet._id}-show-pet-sex`).val(pet.sex);
+          // $(`#${pet._id}-show-pet-age`).val(pet.age);
         })
 
-        $(".show-shelter-container" ).show();
-
+        $(".show-shelter-pet" ).show();
 
         })
       })
