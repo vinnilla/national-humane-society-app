@@ -94,7 +94,7 @@ html, body {
 select {
 	display: inline-block;
 	background-color: rgba(0,0,0,0);
-	border: black;
+	border: none;
 	margin-left: -10px;
   width: 90%;
 }
@@ -190,7 +190,7 @@ a {
 }
 
 .row {
-  border: 2px black solid;
+  /*border: 2px black solid;*/
 }
 
 .pet-information {
@@ -285,11 +285,13 @@ p {
 }
  
 .modal-content {
-  background-color: rgba(0,0,0,0.8) !important;
+  background-color: rgba(0,0,0,0.5) !important;
   z-index: 10;
   color: white;
   width: 55%;
   margin: 0 auto 0 auto;
+  max-height: 85%;
+  overflow: auto;
 }
 
 .modal {
@@ -307,4 +309,8 @@ h6 {
 
 input {
   width: 90% !important;
+}
+
+.show-p-image-template {
+  height: 100px;
 }
