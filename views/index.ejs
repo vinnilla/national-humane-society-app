@@ -71,36 +71,6 @@
           <$ }} else { $>
           <button class="nav-button hidden" id="pet-button">New Pet</button>
           <$ } $>
-          <div class="nav-form hidden" id="pet-information">
-            <button class="nav-submit pet-back right">Back</button>
-            <input type="text" id="pet-name" placeholder="name" autofocus>
-            <select name="animal" id="pet-animal">
-              <option value=" ">animal</option>
-              <option value="cat">Cat</option>
-              <option value="dog">Dog</option>
-              <option value="bird">Bird</option>
-              <option value="reptile">Reptile</option>
-              <option value="small">Small Critters</option>
-              <option value="large">Large Critters</option>
-            </select>
-            <input type="text" id="pet-breed" placeholder="breed">
-            <select name="size" id="pet-size">
-              <option value=" ">size</option>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-              <option value="xl">X-Large</option>
-            </select>
-            <select name="sex" id="pet-sex">
-              <option value=" ">gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-            <input type="number" id="pet-age" placeholder="age">
-            <input type="file" id="pet-image">
-            <button class="nav-submit" id="submit-pet">New Pet</button>
-            <div id="test-image"></div>
-          </div>
         </ul>
 
         <!-- fifth right -->
@@ -112,10 +82,6 @@
           <$ }} else { $>
           <button class="nav-button hidden" id="show-pets-button">Pets</button>
           <$ } $>
-          <div class="nav-form hidden" id="pet-div">
-            <button class="nav-submit show-pets-back right">Back</button><br>
-            <div class="nav-list" id="pet-block"></div>
-          </div>
         </ul>
     </nav>
     <div id="floating-panel">
@@ -123,7 +89,6 @@
       <input class="nav-submt" id="submit" type="button" value="Search Location">
     </div>
   </div> 
-
 <!-- end of header -->
 
 <!-- nav bar modals -->
@@ -166,21 +131,42 @@
         <h4>Profile</h4>
       </div>
       <div class="nav-form">
-        <input type="text" id="user-name" placeholder="name" autofocus>
-        <input type="text" id="user-address" placeholder="address">
-        <input type="text" id="user-city" placeholder="city">
-        <input type="text" id="user-state" placeholder="state">
-        <input type="number" id="user-zip" placeholder="zip">
-        <select name="animal" id="preferred-animal">
-          <option value=" ">animal</option>
-          <option value="cat">Cat</option>
-          <option value="dog">Dog</option>
-          <option value="bird">Bird</option>
-          <option value="reptile">Reptile</option>
-          <option value="small">Small Critters</option>
-          <option value="large">Large Critters</option>
-        </select>
-        <input type="checkbox" name="shelter" id="user-shelter" value="">Shelter<br>
+        <div class="row">
+          <h6>Name:</h6>
+          <input class="right" type="text" id="user-name" placeholder="name" autofocus>
+        </div>
+        <div class="row">
+          <h6>Address:</h6>
+          <input class="right" type="text" id="user-address" placeholder="address">
+        </div>
+        <div class="row">
+          <h6>City:</h6>
+          <input class="right" type="text" id="user-city" placeholder="city">
+        </div>
+        <div class="row">
+          <h6>State:</h6>
+          <input class="right" type="text" id="user-state" placeholder="state">
+        </div>
+        <div class="row">
+          <h6>Zip:</h6>
+          <input class="right" type="number" id="user-zip" placeholder="zip">
+        </div>
+        <div class="row">
+          <h6>Preference:</h6>
+          <select class="right" name="animal" id="preferred-animal">
+            <option value=" ">animal</option>
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+            <option value="bird">Bird</option>
+            <option value="reptile">Reptile</option>
+            <option value="small">Small Critters</option>
+            <option value="large">Large Critters</option>
+          </select>
+        </div>
+        <div class="row">
+          <h6>Shelter?</h6>
+          <input type="checkbox" name="shelter" id="user-shelter" value="">
+        </div>
       </div>
       <div class="modal-footer">
         <button class="nav-submit" id="submit-update">Update</button>
@@ -261,25 +247,68 @@
       <div class="modal-footer">
         <button class="nav-submit" id="update-shelter">Update Shelter</button>
         <button class="nav-submit" id="delete-shelter">Delete Shelter</button>
-        <button class="nav-submit shelter-u-back right">Back</button>
+        <button class="nav-submit shelter-u-back">Back</button>
       </div>
     </div>
   </div>
 
 
 
-  <div id="" class="modal">
+  <div id="pet-information" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h4></h4>
+        <h4>New Pet</h4>
       </div>
-
+        <div class="nav-form">
+          <input type="text" id="pet-name" placeholder="name" autofocus>
+          <select name="animal" id="pet-animal">
+            <option value=" ">animal</option>
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+            <option value="bird">Bird</option>
+            <option value="reptile">Reptile</option>
+            <option value="small">Small Critters</option>
+            <option value="large">Large Critters</option>
+          </select>
+          <input type="text" id="pet-breed" placeholder="breed">
+          <select name="size" id="pet-size">
+            <option value=" ">size</option>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <option value="xl">X-Large</option>
+          </select>
+          <select name="sex" id="pet-sex">
+            <option value=" ">gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <input type="number" id="pet-age" placeholder="age">
+          <input type="file" id="pet-image">
+          <div id="test-image"></div>
+          <div class="hidden" id="loading">Uploading...</div>
+        </div>
       <div class="modal-footer">
-        
+        <button class="nav-submit" id="submit-pet">New Pet</button>
+        <button class="nav-submit pet-back">Back</button>
       </div>
     </div>
   </div>
 
+  <div id="pet-div" class="modal bottom-sheet">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Pets</h4>
+      </div>
+      <div class="nav-form">
+        <div class="nav-list" id="pet-block"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="nav-submit show-pets-back right">Back</button>
+      </div>
+    </div>
+  </div>
+          
   <div id="errors"></div>
   <div id="results"></div>
 

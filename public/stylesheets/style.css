@@ -20,7 +20,7 @@ img {
   color: white;
 }
 
-.nav-submit:active, .nav-button:active {
+.nav-submit:active, .nav-button:active, .nav-submit:focus, .nav-button:focus {
   background-color: red;
 }
 
@@ -46,7 +46,9 @@ img {
 }
 
 #user-shelter {
-	position: initial;
+  position: initial;
+  top: 5px;
+  width: 40px !important;
 	visibility: visible;
 }
 
@@ -93,16 +95,17 @@ select {
 	background-color: rgba(0,0,0,0);
 	border: black;
 	margin-left: -10px;
+  width: 90%;
 }
 
 option {
   background-color: rgba(0,0,0,1);
 }
 
-#pet-div {
+/*#pet-div {
   width: 1000px;
 }
-
+*/
 #address, #submit {
   background-color: rgba(0,0,0,0);
   color: black;

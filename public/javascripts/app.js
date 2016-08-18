@@ -204,7 +204,7 @@ $("#update-button").click(function() {
       $("#user-shelter").val(user.shelter.toString());
 
       $("#additional-information").show();
-      $("#update-button").hide();
+      // $("#update-button").hide();
     })
 })
 
@@ -214,7 +214,7 @@ $(".update-back").click(function() {
 })
 
 $("#shelter-button").click(function() {
-  $("#shelter-button").hide();
+  // $("#shelter-button").hide();
   $("#shelter-information").show();
 })
 
@@ -234,7 +234,7 @@ $(".edit-shelter-button").click(function() {
           $("#shelter-u-description").val(shelter.description);
           $("#shelter-u-phone").val(shelter.phone);
           $("#shelter-u-email").val(shelter.email);
-          $(".edit-shelter-button").hide();
+          // $(".edit-shelter-button").hide();
           $("#shelter-update").show();
         })
     })
@@ -313,7 +313,16 @@ $("#submit-shelter").click(function() {
 })
 
 $("#pet-button").click(function() {
-  $("#pet-button").hide();
+  // $("#pet-button").hide();
+  $("#pet-name").val('');
+  $("#pet-animal").val(' ');
+  $("#pet-breed").val('');
+  $("#pet-size").val(' ');
+  $("#pet-sex").val(' ');
+  $("#pet-age").val('');
+  $("#pet-image").val('');
+  $("#test-image").html('');
+
   $("#pet-information").show();
 })
 
@@ -339,6 +348,7 @@ $("#submit-pet").click(function() {
   img.src = window.URL.createObjectURL(uploadedImage);
   img.height = 100;
   $("#test-image").html(img);
+  $("#loading").show();
   console.log(img.src);
 
   // var fileReader = new FileReader();
@@ -400,6 +410,7 @@ $("#submit-pet").click(function() {
         else {
           $("#errors").html('');
           $("#pet-information").hide();
+          $("#loading").hide();
           $("#pet-button").show();
         };
       }); //end of patch for pet
@@ -537,7 +548,7 @@ $("#show-pets-button").click(function() {
           })
         }); //end of for each
         $("#errors").html('');
-        $("#show-pets-button").hide();
+        // $("#show-pets-button").hide();
         $("#pet-div").show();
       }
     })
