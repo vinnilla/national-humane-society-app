@@ -146,7 +146,6 @@ $.get('/shelters')
   //          'las vegas, NV'
   // ];
 
-
   //Will set the next marker based on the location array
   var nextAddress = 0;
   function theNext() {
