@@ -114,7 +114,12 @@ option {
   border-bottom: solid 1px black;
 }
 
+#address {
+  width: 50% !important;
+}
+
 #submit {
+  width: 45% !important;
   border-bottom: solid 1px rgba(0,0,0,0);
 }
 
@@ -313,4 +318,30 @@ input {
 
 .show-p-image-template {
   height: 100px;
+}
+
+#welcome {
+  text-align: center;
+  color: white;
+  width: 100%;
+  z-index: 999;
+  position: absolute;
+  background-color: rgba(0,0,0,0.2);
+}
+
+#welcome a {
+  color: white;
+  display: inline-block;
+  font-size: 3.56rem;
+}
+
+h2 {
+  display: inline-block;
+}
+
+.welcome-option {
+  width: 45%;
+  height: 500px;
+  display: inline-block;
+  background-color: red;
 }
