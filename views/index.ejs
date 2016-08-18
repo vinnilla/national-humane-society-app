@@ -317,6 +317,31 @@
       </div>
     </div>
   </div>
+
+
+  <!-- SHOW SHELTER -->
+
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Shelter</h4>
+      </div>
+      <div class="show-shelter-container">
+        <div class="show-shelter-info">
+          <div class="show-shelter-name" id="show-shelter-name"></div>
+          <div class="show-shelter-location" id="show-shelter-location"></div>
+          <div class="show-shelter-contact" id="show-shelter-contact"></div>
+        </div>
+        <div class="show-shelter-all-pets">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="close-shelter-container" type="close_show_shelter">Close</button>
+      </div>
+    </div>
+  </div>
+
+
           
   <div id="errors"></div>
   <div id="results"></div>
@@ -359,8 +384,14 @@
  </script>
 
   <script type="text/template" id="show-pet-template">
-    <div>
-
+    <div class="show-shelter-pet" id="<%= _id %>-show-shelter-pet">
+      <div class="show-p-name-template" id="<%= _id %>-show-pet-name"><%= name %></div>
+      <div class="show-p-animal-template" id="<%= _id %>-show-pet-animal"><%= animal %></div>
+      <div class="show-p-breed-template" id="<%= _id %>-show-pet-breed"><%= breed %></div>
+      <div class="show-p-size-template" id ="<%= _id %>-show-pet-size"><%= size %></div>
+      <div class="show-p-sex-template" id="<%= _id %>-show-pet-sex"><%= sex %></div>
+      <div class="show-p-age-template" id="<%= _id %>-showt-pet-age"><%= age %></div>
+      <img src="<%= image %>" alt="Pet Picture">
     </div>
   </script>
 
@@ -406,46 +437,13 @@
 
 <!-- Show Shelter view with template for pets -->
 
-<!-- Modal -->
 
-<div id="modal1" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-    </div>
-  </div>
 
 
 <!-- End bootstrap show shelter -->
 
-<!-- <div class="show-shelter-container hidden">
-<button class="close-shelter-container"   type="close_show_shelter">Close</button>
-  <div class="show-shelter-info">
-    <div class= "show-shelter-name" id="show_shelter_name"></div>
-    <div class="show-shelter-location" id="show_shelter_location"></div>
-    <div class="show-shelter-contact" id="show_shelter_contact"></div>
-    </div>
-  <div class="show-shelter-all-pets">
-  </div>
+<!-- 
 
-</div>
-
- <script type="text/template" id="show-pets-template">
-   <div class="show-shelter-pet" id="<%= _id %>-show-shelter-pet">
-     <div class="show-p-name-template" id="<%= _id %>-show-pet-name"><%= name %></div>
-     <div class="show-p-animal-template" id="<%= _id %>-show-pet-animal"><%= animal %></div>
-     <div class="show-p-breed-template" id="<%= _id %>-show-pet-breed"><%= breed %></div>
-     <div class="show-p-size-template" id ="<%= _id %>-show-pet-size"><%= size %></div>
-     <div class="show-p-sex-template" id="<%= _id %>-show-pet-sex"><%= sex %></div>
-     <div class="show-p-age-template" id="<%= _id %>-showt-pet-age"><%= age %></div>
-     <img src="<%= image %>" alt="Pet Picture">
-   </div>
-
-   </div>
- </script>
  -->
 
 

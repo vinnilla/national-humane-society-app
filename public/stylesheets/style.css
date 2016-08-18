@@ -139,20 +139,25 @@ option {
   margin-left: 20px;
 }
 
-.show-shelter-container {
+/*.show-shelter-container {
   width: 500px;
   height: 500px;
   position: absolute;
   left: 300px;
   top: 300px;
   background-color: red;
+}*/
+
+#show-shelter-name {
+  width: 100%;
+  height: 100px;
 }
 
 #show-shelter-pet, .show-shelter-all-pets {
   width: 500px;
   height: 200px;
   background-color: transparent;
-  color: black;
+  color: white;
 }
 
 footer {
