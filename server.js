@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
+var jwtDecode = require('jwt-decode');
 
 
 // load the env vars

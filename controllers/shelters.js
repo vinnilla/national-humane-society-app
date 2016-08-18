@@ -118,6 +118,7 @@ function newpet(req, res, next) {
       if(req.body.size) pet.size = req.body.size;
       if(req.body.sex) pet.sex = req.body.sex;
       if(req.body.age) pet.age = req.body.age;
+      if(req.body.image) pet.image = req.body.image;
       shelter.pets.push(pet);
       shelter.save(function(err, shelter) {
         if (err) {
@@ -129,22 +130,22 @@ function newpet(req, res, next) {
       });
 
 
-      if(req.body.image) {
-        imgur.uploadFile(image)
-        .then(function(json) {
-          console.log(json.data.link);
-          pet.image = json.data.link;
-          // shelter.pets.push(pet);
-          // shelter.save(function(err, shelter) {
-          //   if (err) {
-          //     res.json({message: err});
-          //   }
-          //   else {
-          //     res.json(shelter);
-          //   }
-          // });
-        });
-      }
+      // if(req.body.image) {
+      //   imgur.uploadFile(image)
+      //   .then(function(json) {
+      //     console.log(json.data.link);
+      //     pet.image = json.data.link;
+      //     shelter.pets.push(pet);
+      //     shelter.save(function(err, shelter) {
+      //       if (err) {
+      //         res.json({message: err});
+      //       }
+      //       else {
+      //         res.json(shelter);
+      //       }
+      //     });
+      //   });
+      // }
     };
   });
 };

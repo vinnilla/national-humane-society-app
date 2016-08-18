@@ -329,11 +329,12 @@ $("#submit-pet").click(function() {
   var size = $("#pet-size").val();
   var sex = $("#pet-sex").val();
   var age = $("#pet-age").val();
-  var img = document.createElement("img");
+  var img = new Image();
   var imgur = $("#imgur-key").html();
 
   var uploadedImage = $("#pet-image")[0].files[0];
   // console.log(typeof uploadedImage);
+
 
   img.src = window.URL.createObjectURL(uploadedImage);
   img.height = 100;
@@ -345,60 +346,67 @@ $("#submit-pet").click(function() {
   // console.log(data);
 
   // convert blob to data url
-  var canvas = document.createElement('canvas');
-  var context = canvas.getContext("2d");
-  context.drawImage(img, 0, 0);
-  var dataurl = canvas.toDataURL('image/jpeg');
+  // var decoded = jwt_decode(img.src);
+  // console.log(decoded);
+
+  // convert blob to data url
+  // var canvas = document.createElement('canvas');
+  // var context = canvas.getContext("2d");
+  // context.drawImage(img, 0, 0);
+  // var dataurl = canvas.toDataURL('image/png', 1);
   // console.log(dataurl)
   
-  var array = dataurl.split(",");
+  // var array = dataurl.split(",");
   // console.log(array);
-  // var byte = atob(array[1]).toString(2);
+  // var byte = btoa(img);
   // console.log(byte);
-  console.log(array[1])
+  // console.log(array[1])
+
+  var fd = new FormData();
+  fd.append("image", uploadedImage);
 
   //post to imgur
   
-  // $.ajax({
-  //   url: "https://api.imgur.com/3/image",
-  //   type: "POST",
-  //   headers: {
-  //     Authorization: `Client-ID ${imgur}`,
-  //     Accept: "application/json"
-  //   },
-  //   data: {
-  //     image: window.atob(array[1]),
-  //     type: "base64"
-  //   },
-  //   success: function(result) {
-  //     console.log(result.data);
-  //     console.log(result.data.id);
-  //   }
-  // });
-
   $.ajax({
-    url: `/shelters/${localStorage.shelter}/pet`,
-    type: "patch",
-    dataType: 'json',
-    data: {
-      name: name,
-      animal: animal,
-      breed: breed,
-      size: size,
-      sex: sex,
-      age: age
-    }
+    url: "https://api.imgur.com/3/image.json",
+    type: "POST",
+    headers: {
+      Authorization: `Client-ID ${imgur}`
+    },
+    data: fd,
+    processData: false,
+    contentType: false
   })
-  .then(function(data) {
-    if(data.error) {
-      $("#errors").html(`Error: ${data.error}`);
-    }
-    else {
-      $("#errors").html('');
-      $("#pet-information").hide();
-      $("#pet-button").show();
-    };
-  }); //end of patch for pet
+    .then(function(result) {
+      console.log(result.data.link);
+      $.ajax({
+        url: `/shelters/${localStorage.shelter}/pet`,
+        type: "patch",
+        dataType: 'json',
+        data: {
+          name: name,
+          animal: animal,
+          breed: breed,
+          size: size,
+          sex: sex,
+          age: age,
+          image: result.data.link
+        }
+      })
+      .then(function(data) {
+        if(data.error) {
+          $("#errors").html(`Error: ${data.error}`);
+        }
+        else {
+          $("#errors").html('');
+          $("#pet-information").hide();
+          $("#pet-button").show();
+        };
+      }); //end of patch for pet
+  
+    });
+  
+
   
 });
 
