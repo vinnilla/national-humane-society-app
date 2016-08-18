@@ -350,7 +350,7 @@ $("#submit-pet").click(function() {
   context.drawImage(img, 0, 0);
   var dataurl = canvas.toDataURL('image/jpeg');
   // console.log(dataurl)
-  
+
   var array = dataurl.split(",");
   // console.log(array);
   // var byte = atob(array[1]).toString(2);
@@ -358,23 +358,23 @@ $("#submit-pet").click(function() {
   console.log(array[1])
 
   //post to imgur
-  
-  // $.ajax({
-  //   url: "https://api.imgur.com/3/image",
-  //   type: "POST",
-  //   headers: {
-  //     Authorization: `Client-ID ${imgur}`,
-  //     Accept: "application/json"
-  //   },
-  //   data: {
-  //     image: window.atob(array[1]),
-  //     type: "base64"
-  //   },
-  //   success: function(result) {
-  //     console.log(result.data);
-  //     console.log(result.data.id);
-  //   }
-  // });
+
+  $.ajax({
+    url: "https://api.imgur.com/3/image",
+    type: "POST",
+    headers: {
+      Authorization: `Client-ID ${imgur}`,
+      Accept: "application/json"
+    },
+    data: {
+      image: array[1],
+      type: "base64"
+    },
+    success: function(result) {
+      console.log(result.data);
+      console.log(result.data.id);
+    }
+  });
 
   $.ajax({
     url: `/shelters/${localStorage.shelter}/pet`,
@@ -399,7 +399,7 @@ $("#submit-pet").click(function() {
       $("#pet-button").show();
     };
   }); //end of patch for pet
-  
+
 });
 
 $("#logout").click(function () {

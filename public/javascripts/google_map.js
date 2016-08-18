@@ -85,9 +85,10 @@ document.getElementById('submit').addEventListener('click', function() {
            });
 //create a window on click with the information about the shelter to display and link to profile
   google.maps.event.addListener(marker, 'click', function() {
-     infowindow.setContent(`<button class="show_shelter" id='${id}''> ${contentString} </button>`);
+     infowindow.setContent(`<button class="show_shelter" data-target="modal1" id='${id}''> ${contentString} </button>`);
      infowindow.open(map,marker);
      $(".show_shelter").click(function() {
+      $('#modal1').openModal();
       var shelter_id = $(".show_shelter").attr('id');
       console.log(shelter_id)
       $.get(`/shelters/${shelter_id}`)
@@ -106,8 +107,8 @@ document.getElementById('submit').addEventListener('click', function() {
           $(`#${pet._id}-show-pet-sex`).val(pet.sex);
           $(`#${pet._id}_show-pet-age`).val(pet.age);
         })
-        $(".show-shelter-container").show();
 
+        $(".show-shelter-container" ).show();
 
 
         })
@@ -157,9 +158,20 @@ $.get('/shelters')
   }
 
 
+// $('.modal-trigger').leanModal({
+//       dismissible: true, // Modal can be dismissed by clicking outside of the modal
+//       opacity: .5, // Opacity of modal background
+//       in_duration: 300, // Transition in duration
+//       out_duration: 200, // Transition out duration
+//       starting_top: '4%', // Starting top style attribute
+//       ending_top: '10%', // Ending top style attribute
+//       ready: function() { alert('Ready'); }, // Callback for Modal open
+//       complete: function() { alert('Closed'); } // Callback for Modal close
+//     }
+//   );
 
 
-
+//$('#modal1').openModal();
 
 
 
