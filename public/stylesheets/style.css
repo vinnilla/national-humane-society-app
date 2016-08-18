@@ -7,6 +7,10 @@
   vertical-align: middle;
   margin-top: -18px; }
 
+.navbar-fixed {
+  font-family: "Baloo Da", cursive;
+}
+
 .nav-wrapper {
 	background-color: rgba(0,0,0,.9); }
 
@@ -128,16 +132,24 @@ option {
   display: inline;
 }
 
+.pet-container, .pet-container button {
+  text-align: center;
+}
+
+.pet-stats, .pet-stat {
+  display: inline;
+}
+
+.show-p-image-template {
+  display: inline;
+}
+
 .u-pet-name, .u-pet-animal, .u-pet-breed, .u-pet-size, .u-pet-sex, .u-pet-age {
   display:inline !important;
   width: 300px !important;
 }
 
-.u-pet-submit {
-  display:block;
-}
-
-.edit-pet, .delete-pet, .update-pet-back {
+.edit-pet, .delete-pet, .update-pet-back, .u-pet-submit {
   text-decoration: underline;
 }
 
@@ -339,6 +351,7 @@ input {
 
 h2 {
   display: inline-block;
+  font-family: 'Baloo Da', cursive;
 }
 
 body, html{
@@ -347,6 +360,7 @@ body, html{
 }
 
 .welcome-option {
+  font-family: 'Baloo Da', cursive;
   font-size: 35px;
   line-height: 170px;
   width: 80%;
@@ -374,4 +388,12 @@ body, html{
   position: absolute;
   left: 0;
   top: 0;
+}
+
+#welcome-close {
+  font-family: 'Baloo Da', cursive;
+  color: rgba(79,216,216,1);
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
 }

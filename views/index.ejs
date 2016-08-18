@@ -22,6 +22,7 @@
   <$ if (!user) { $>
   <div id="welcome">
     <div class="modal-content" id="welcome-content">
+        <button class="right" id="welcome-close">X</button>
       <div class="modal-header">
         <h2>Welcome to </h2>
         <a href="/" class="brand-logo">NADO<span>PeT</span></a>
@@ -117,6 +118,7 @@
 <!-- nav bar modals -->
   <div id="login" class="modal">
     <div class="modal-content">
+        <button class="nav-submit local-back right">X</button>
       <div class="modal-header">
         <h4>Login</h4>
       </div>
@@ -126,13 +128,13 @@
       </div>
       <div class="modal-footer">
         <button class="nav-submit left" id="submit-login">Login</button>
-        <button class="nav-submit local-back">Back</button>
       </div>
     </div>
   </div>
 
   <div id="register" class="modal">
     <div class="modal-content">
+        <button class="nav-submit local-back right">X</button>
       <div class="modal-header">
         <h4>Register</h4>
       </div>
@@ -143,13 +145,13 @@
       </div>
       <div class="modal-footer">
         <button class="nav-submit" id="submit-register">Register</button>
-        <button class="nav-submit local-back">Back</button>
       </div>
     </div>
   </div>
   
   <div id="additional-information" class="modal">
     <div class="modal-content">
+        <button class="nav-submit update-back right">X</button>
       <div class="modal-header">
         <h4>Profile</h4>
       </div>
@@ -193,7 +195,6 @@
       </div>
       <div class="modal-footer">
         <button class="nav-submit" id="submit-update">Update</button>
-        <button class="nav-submit update-back right">Back</button>
         <$ if (user) { $>
           <div class="hidden" id="oauth-id"><$= user.id $></div>
         <$ } $>
@@ -206,6 +207,7 @@
 
   <div id="shelter-information" class="modal">
     <div class="modal-content">
+        <button class="nav-submit shelter-back right">X</button>
       <div class="modal-header">
         <h4>Shelter Profile</h4>
       </div>
@@ -221,7 +223,6 @@
       </div>
       <div class="modal-footer">
         <button class="nav-submit" id="submit-shelter">Save</button>
-        <button class="nav-submit shelter-back right">Back</button>
       </div>
     </div>
   </div>
@@ -230,6 +231,7 @@
 
   <div id="shelter-update" class="modal">
     <div class="modal-content">
+        <button class="nav-submit shelter-u-back right">X</button>
       <div class="modal-header">
         <h4>Shelter Profile</h4>
       </div>
@@ -270,7 +272,6 @@
       <div class="modal-footer">
         <button class="nav-submit" id="update-shelter">Update Shelter</button>
         <button class="nav-submit" id="delete-shelter">Delete Shelter</button>
-        <button class="nav-submit shelter-u-back right">Back</button>
       </div>
     </div>
   </div>
@@ -279,6 +280,7 @@
 
   <div id="pet-information" class="modal">
     <div class="modal-content">
+        <button class="nav-submit pet-back right">X</button>
       <div class="modal-header">
         <h4>New Pet</h4>
       </div>
@@ -313,13 +315,13 @@
         </div>
       <div class="modal-footer">
         <button class="nav-submit" id="submit-pet">Save</button>
-        <button class="nav-submit pet-back right">Back</button>
       </div>
     </div>
   </div>
 
   <div id="pet-div" class="modal">
     <div class="modal-content">
+        <button class="nav-submit show-pets-back right">X</button>
       <div class="modal-header">
         <h4>Pets</h4>
       </div>
@@ -327,7 +329,6 @@
         <div class="nav-list" id="pet-block"></div>
       </div>
       <div class="modal-footer">
-        <button class="nav-submit show-pets-back right">Back</button>
       </div>
     </div>
   </div>
@@ -446,12 +447,17 @@
 
   <script type="text/template" id="pet-template">
     <div class="pet-list" id="<%= _id %>-list">
-      <img class="show-p-image-template" id="<%= _id %>-show-pet-image" src="<%= image %>">
       <div class="pet-container" id="<%= _id %>-container">
-        <%= name %> <%= breed %> <%= animal %> <%= size %> <%= sex %> <%= age %>
+        <img class="show-p-image-template left" id="<%= _id %>-show-pet-image" src="<%= image %>">
+        <div class="pet-stats">
+          <div class="pet-stat"><%= name %></div> <br>
+          <div class="pet-stat"><%= breed %> <%= animal %></div><br>
+          <div class="pet-stat"><%= size %> <%= sex %> <%= age %></div><br>
+        </div>
       </div>
       <button class="nav-submit update-pet-back hidden" id="<%= _id %>-back">Back</button>
       <button class="nav-submit edit-pet" id="<%= _id %>-edit">Edit</button>
+      <button class="nav-submit u-pet-submit hidden" id="<%= _id %>-submit">Update Pet</button>
       <button class="nav-submit delete-pet" id="<%= _id %>-delete">Delete</button>
       <div class="nav-list hidden update-pet" id="<%= _id %>-update">
         <input type="text" class="u-pet-name" id="<%= _id %>-u-pet-name" placeholder="name" autofocus>
@@ -478,7 +484,6 @@
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
-        <button class="nav-submit u-pet-submit" id="<%= _id %>-submit">Update Pet</button>
       </div>
     </div>
   </script>

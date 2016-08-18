@@ -523,6 +523,7 @@ $("#show-pets-button").click(function() {
             $(`#${pet._id}-edit`).show();
             $(`#${pet._id}-update`).hide();
             $(`#${pet._id}-back`).hide();
+            $(`#${pet._id}-submit`).hide();
           }); //end of submit click event
           $(`#${pet._id}-delete`).click(function() {
             $.ajax({
@@ -539,20 +540,23 @@ $("#show-pets-button").click(function() {
               };
             });
             $("#errors").html('');
-            $(`#${pet._id}-edit`).show();
+            $(`#${pet._id}-edit`).hide();
             $(`#${pet._id}-update`).hide();
             $(`#${pet._id}-back`).hide();
+            $(`#${pet._id}-submit`).hide();
           }); //end of delete click event
 
           $(`#${pet._id}-edit`).click(function() {
             $(`#${pet._id}-update`).show();
             $(`#${pet._id}-back`).show();
+            $(`#${pet._id}-submit`).show();
             $(`#${pet._id}-edit`).hide();
           })
           $(`#${pet._id}-back`).click(function() {
             $(`#${pet._id}-edit`).show();
             $(`#${pet._id}-update`).hide();
             $(`#${pet._id}-back`).hide();
+            $(`#${pet._id}-submit`).hide();
           })
         }); //end of for each
         $("#errors").html('');
@@ -565,6 +569,10 @@ $("#show-pets-button").click(function() {
 $(".show-pets-back").click(function() {
   $("#pet-div").hide();
   $("#show-pets-button").show();
+})
+
+$("#welcome-close").click(function() {
+  $("#welcome").hide();
 })
 
 })
