@@ -366,7 +366,6 @@ $("#submit-pet").click(function() {
   fd.append("image", uploadedImage);
 
   //post to imgur
-  
   $.ajax({
     url: "https://api.imgur.com/3/image.json",
     type: "POST",
@@ -405,10 +404,7 @@ $("#submit-pet").click(function() {
       }); //end of patch for pet
   
     });
-  
-
-  
-});
+  });
 
 $("#logout").click(function () {
   $("#login-button").show();
