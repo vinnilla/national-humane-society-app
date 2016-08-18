@@ -29,7 +29,7 @@ function login (req, res, next) {
 				    else {
 				    	// 3. Return a token
 				    	var token = jwt.sign({ user: user._id }, process.env.JWT_SECRET);
-				    	res.json({ token: token, id: user._id, shelter: user.shelter, shelter_id: user.shelterId, user: user })
+				    	res.json({ token: token, id: user._id, shelter: user.shelter, shelter_id: user.shelterId, user_local: user })
 				    }
 				});
 			}

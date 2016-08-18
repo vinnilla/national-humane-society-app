@@ -169,8 +169,6 @@ $.get('/shelters')
 
 
 
-// <script async defer src="https://maps.googleapis.com/maps/api/js?key=<$= google_map_key $>&callback=initMap">
-// </script>
 
 
 //   // NOTE: This uses cross-domain XHR, and may not work on older browsers.

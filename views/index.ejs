@@ -15,7 +15,6 @@
       href="http://i.imgur.com/yyaH4ZF.jpg">
 </head>
 <body>
-
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper"><img alt="Brand" src="http://www.sumopaint.com/images/temp/xzfjiaqlppagfpsj.png">
@@ -79,10 +78,12 @@
           <$ if (!user) { $>
           <button class="nav-button" id="register-button">Register</button>
           <$ } else { $>
-          <$ if (user.shelter) { $>
+          <$ if (user.shelterId) { $>
+          <button class="nav-button edit-shelter-button">Shelter</button>
+          <$ } else {
+            if (user.shelter) { $>
           <button class="nav-button" id="shelter-button">New Shelter</button>
-          <button class="nav-button hidden edit-shelter-button">Shelter</button>
-          <$ }} $>
+          <$ }}} $>
           <button class="nav-button hidden" id="shelter-button">New Shelter</button>
           <button class="nav-button hidden edit-shelter-button">Shelter</button>
 
@@ -216,7 +217,7 @@
 </div>
 
 <!-- Replace the value of the key parameter with your own API key. -->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<$= google_map_key $>&callback=initMap">
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<$= google_map_key $>">
  </script>
 
   <script type="text/template" id="show-pet-template">
