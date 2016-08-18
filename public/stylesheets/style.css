@@ -18,31 +18,37 @@ img {
 	background-color: rgba(0,0,0,0);
 	border: solid 0px;
   color: white;
-
 }
 
-.nav-submit:active, .nav-button:active {
+.nav-submit:active, .nav-button:active, .nav-submit:focus, .nav-button:focus {
   background-color: red;
 }
 
 .nav-button {
 	margin: 0 20px;
 }
+.nav-submit {
+  margin: 10px 10px 0 0;
+}
 
 .nav-form, .nav-list {
 	color: white;
-	background-color: rgba(0,0,0,0.8);
+	/*background-color: rgba(0,0,0,0.8);
 	border-width: 0px 20px 5px 20px;
 	border-style: solid;
-	border-color: rgba(0,0,0,0);
+	border-color: rgba(0,0,0,0);*/
 }
 
 .nav-form {
-  width: 400px;
+  /*width: 400px;*/
+  margin: 0 auto;
+  width: 90%;
 }
 
 #user-shelter {
-	position: initial;
+  position: initial;
+  top: 5px;
+  width: 40px !important;
 	visibility: visible;
 }
 
@@ -66,9 +72,9 @@ html, body {
 #floating-panel{
   position: absolute;
   top: 68px;
-  left: 10%;
-  z-index: 5;
-  background-color: rgba(0,0,0,0);
+  left: 6%;
+  z-index: -1;
+  background-color: rgba(255,255,255,0.8);
   padding: 5px;
   border: 1px solid rgba(0,0,0,0);
   text-align: center;
@@ -87,15 +93,20 @@ html, body {
 
 select {
 	display: inline-block;
-	background-color: black;
+	background-color: rgba(0,0,0,0);
 	border: black;
 	margin-left: -10px;
+  width: 90%;
 }
 
-#pet-div {
+option {
+  background-color: rgba(0,0,0,1);
+}
+
+/*#pet-div {
   width: 1000px;
 }
-
+*/
 #address, #submit {
   background-color: rgba(0,0,0,0);
   color: black;
@@ -252,4 +263,43 @@ a {
 
 p {
   display: inline;
+}
+
+.modal-footer, .modal-header {
+  background-color: rgba(0,0,0,0) !important;
+}
+
+.modal-header {
+  /*border-bottom: rgba(255,255,255,0.2) solid 2px;*/
+  margin-bottom: 35px;
+}
+
+.modal-footer {
+  border-top: rgba(255,255,255,0.2) solid 2px;
+  margin-top: 20px;
+}
+ 
+.modal-content {
+  background-color: rgba(0,0,0,0.8) !important;
+  z-index: 10;
+  color: white;
+  width: 55%;
+  margin: 0 auto 0 auto;
+}
+
+.modal {
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  background-color: rgba(0,0,0,0.5);
+}
+
+h6 {
+  display: inline;
+  line-height: 50px;
+}
+
+input {
+  width: 90% !important;
 }
