@@ -176,9 +176,21 @@ $("#login-button").click(function() {
   $("#login-button").hide();
   $("#register-button").hide();
 })
+$("#welcome-login").click(function() {
+  $("#login").show();
+  $("#welcome").hide();
+  $("#login-button").hide();
+  $("#register-button").hide();
+})
 
 $("#register-button").click(function() {
   $("#register").show();
+  $("#login-button").hide();
+  $("#register-button").hide();
+})
+$("#welcome-register").click(function() {
+  $("#register").show();
+  $("#welcome").hide();
   $("#login-button").hide();
   $("#register-button").hide();
 })

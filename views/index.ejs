@@ -18,6 +18,26 @@
       href="http://www.sumopaint.com/images/temp/xzfjiaqlppagfpsj.png">
 </head>
 <body>
+
+  <$ if (!user) { $>
+  <div id="welcome">
+    <div class="modal-content" id="welcome-content">
+      <div class="modal-header">
+        <h2>Welcome to </h2>
+        <a href="/" class="brand-logo">NADO<span>PeT</span></a>
+      </div>
+      <div>
+        <a href="/auth/google" id="welcome-oauth"><button class="welcome-option">Login Through Google</button></a>
+        <button class="welcome-option" id="welcome-login">Login</button>
+        <button class="welcome-option" id="welcome-register">Register</button>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+  <$ } $>
+
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper"><img alt="Brand" src="http://www.sumopaint.com/images/temp/xzfjiaqlppagfpsj.png">
@@ -337,21 +357,7 @@
 
   <!-- WELCOME OVERLAY -->
 
-  <div id="welcome">
-    <div class="modal-content" id="welcome-content">
-      <div class="modal-header">
-        <h2>Welcome to </h2>
-        <a href="/" class="brand-logo">NADO<span>PeT</span></a>
-      </div>
-      <div>
-        <div class="welcome-option" id="welcome-register"></div>
-        <div class="welcome-option" id="welcome-login"></div>
-      </div>
-      <div class="modal-footer">
-        
-      </div>
-    </div>
-  </div>
+  
           
   <div id="errors"></div>
   <div id="results"></div>
