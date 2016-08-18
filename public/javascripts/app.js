@@ -417,6 +417,9 @@ $("#logout").click(function () {
   $("#local-logout").hide();
   $("#update-button").hide();
   $("#shelter-button").hide();
+  $(".edit-shelter-button").hide();
+  $("#pet-button").hide();
+  $("#show-pets-button").hide();
   // unsetting the token will logout the user
   localStorage.removeItem('token');
   localStorage.removeItem('id');

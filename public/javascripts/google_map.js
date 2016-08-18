@@ -99,12 +99,6 @@ document.getElementById('submit').addEventListener('click', function() {
         $(`.show-shelter-all-pets`).html('');
         shelter.pets.forEach(function(pet) {
           $(".show-shelter-all-pets").append(showPetTemplate(pet));
-          $(`#${pet._id}-show-pet-name`).val(pet.name);
-          $(`#${pet._id}-show-pet-animal`).val(pet.animal);
-          $(`#${pet._id}-show-pet-breed`).val(pet.breed);
-          $(`#${pet._id}-show-pet-size`).val(pet.size);
-          $(`#${pet._id}-show-pet-sex`).val(pet.sex);
-          $(`#${pet._id}_show-pet-age`).val(pet.age);
         })
         $(".show-shelter-container").show();
 

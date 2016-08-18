@@ -19,8 +19,10 @@
     <nav>
       <div class="nav-wrapper"><img alt="Brand" src="http://www.sumopaint.com/images/temp/xzfjiaqlppagfpsj.png">
         <a href="/" class="brand-logo left">NADO<span>Pet</span></a>
-        <ul class="right">
+       
+        <!-- first right -->
 
+        <ul class="right">
           <div id="oauth">
             <$ if (user) { $>
               <li><a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a></li>
@@ -28,108 +30,47 @@
               <li><a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a></li>
             <$ } $>
           </div>
-
           <div id="local-logout" class="hidden">
             <button class="nav-button" id="logout"><i class="material-icons left">trending_flat</i>Logout</button>
           </div>
-
         </ul>
+
+        <!-- second right -->
+
         <ul class="right">
           <$ if (user) { $>
             <button class="nav-button" id="update-button">Update</button>
           <$ } else { $>
             <button class="nav-button" id="login-button">Login</button>
+            <button class="nav-button hidden" id="update-button" >Update</button>
           <$ } $>
-          <button class="nav-button hidden" id="update-button">Update</button>
-
-          <div class="nav-form hidden" id="login">
-            <button class="nav-submit local-back right">Back</button>
-            <input type="email" id="login-email" placeholder="email" autofocus>
-            <input type="password" id="login-password" placeholder="password">
-            <button class="nav-submit" id="submit-login">Login</button>
-          </div>
-
-          <div class="nav-form hidden" id="additional-information">
-            <button class="nav-submit update-back right">Back</button>
-            <input type="text" id="user-name" placeholder="name" autofocus>
-            <input type="text" id="user-address" placeholder="address">
-            <input type="text" id="user-city" placeholder="city">
-            <input type="text" id="user-state" placeholder="state">
-            <input type="number" id="user-zip" placeholder="zip">
-            <select name="animal" id="preferred-animal">
-              <option value=" ">animal</option>
-              <option value="cat">Cat</option>
-              <option value="dog">Dog</option>
-              <option value="bird">Bird</option>
-              <option value="reptile">Reptile</option>
-              <option value="small">Small Critters</option>
-              <option value="large">Large Critters</option>
-            </select>
-            <input type="checkbox" name="shelter" id="user-shelter" value="">Shelter<br>
-            <$ if (user) { $>
-              <div class="hidden" id="oauth-id"><$= user.id $></div>
-            <$ } $>
-              <div class="hidden" id="imgur-key"><$= imgur_key $></div>
-            <button class="nav-submit" id="submit-update">Update</button>
-          </div>
         </ul>
+
+        <!-- third right -->
 
         <ul class="right">
           <$ if (!user) { $>
           <button class="nav-button" id="register-button">Register</button>
+          <button class="nav-button hidden edit-shelter-button">Shelter</button>
+          <button class="nav-button hidden" id="shelter-button">New Shelter</button>
           <$ } else { $>
           <$ if (user.shelterId) { $>
           <button class="nav-button edit-shelter-button">Shelter</button>
           <$ } else {
             if (user.shelter) { $>
-          <button class="nav-button" id="shelter-button">New Shelter</button>
+            <button class="nav-button" id="shelter-button">New Shelter</button>
           <$ }}} $>
-          <button class="nav-button hidden" id="shelter-button">New Shelter</button>
-          <button class="nav-button hidden edit-shelter-button">Shelter</button>
-
-          <div class="nav-form hidden" id="register">
-            <button class="nav-submit local-back right">Back</button>
-            <input type="email" id="register-email" placeholder="email" autofocus>
-            <input type="password" id="register-password" placeholder="password">
-            <input type="password" id="confirm-password" placeholder="confirm password">
-            <button class="nav-submit" id="submit-register">Register</button>
-          </div>
-
-          <div class="nav-form hidden" id="shelter-information">
-            <button class="nav-submit shelter-back right">Back</button>
-            <input type="text" id="shelter-name" placeholder="name" autofocus>
-            <input type="text" id="shelter-address" placeholder="address">
-            <input type="text" id="shelter-city" placeholder="city">
-            <input type="text" id="shelter-state" placeholder="state">
-            <input type="number" id="shelter-zip" placeholder="zip">
-            <input type="text" id="shelter-description" placeholder="description">
-            <input type="text" id="shelter-phone" placeholder="phone">
-            <input type="email" id="shelter-email" placeholder="email">
-            <button class="nav-submit" id="submit-shelter">New Shelter</button>
-          </div>
-
-          <div class="nav-form hidden" id="shelter-update">
-            <button class="nav-submit shelter-u-back right">Back</button>
-            <input type="text" id="shelter-u-name" placeholder="name" autofocus>
-            <input type="text" id="shelter-u-address" placeholder="address">
-            <input type="text" id="shelter-u-city" placeholder="city">
-            <input type="text" id="shelter-u-state" placeholder="state">
-            <input type="number" id="shelter-u-zip" placeholder="zip">
-            <input type="text" id="shelter-u-description" placeholder="description">
-            <input type="text" id="shelter-u-phone" placeholder="phone">
-            <input type="email" id="shelter-u-email" placeholder="email">
-            <button class="nav-submit" id="update-shelter">Update Shelter</button>
-            <button class="nav-submit" id="delete-shelter">Delete Shelter</button>
-          </div>
         </ul>
+
+        <!-- fourth right -->
 
         <ul class="right">
           <$ if (user) {
                 if (user.shelterId) {$>
           <button class="nav-button" id="pet-button">New Pet</button>
-          <$ }} $>
+          <$ }} else { $>
           <button class="nav-button hidden" id="pet-button">New Pet</button>
-
+          <$ } $>
           <div class="nav-form hidden" id="pet-information">
             <button class="nav-submit pet-back right">Back</button>
             <input type="text" id="pet-name" placeholder="name" autofocus>
@@ -162,13 +103,15 @@
           </div>
         </ul>
 
+        <!-- fifth right -->
+
         <ul class="right">
           <$ if (user) {
                 if (user.shelterId) { $>
                 <button class="nav-button" id="show-pets-button">Pets</button>
-          <$ }} $>
+          <$ }} else { $>
           <button class="nav-button hidden" id="show-pets-button">Pets</button>
-
+          <$ } $>
           <div class="nav-form hidden" id="pet-div">
             <button class="nav-submit show-pets-back right">Back</button><br>
             <div class="nav-list" id="pet-block"></div>
@@ -178,6 +121,162 @@
     <div id="floating-panel">
       <input id="address" type="textbox" placeholder="Search Location" value=" " autofocus>
       <input class="nav-submt" id="submit" type="button" value="Search Location">
+    </div>
+  </div> 
+
+<!-- end of header -->
+
+<!-- nav bar modals -->
+  <div id="login" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Login</h4>
+      </div>
+      <div class="nav-form">
+        <input type="email" id="login-email" placeholder="email" autofocus>
+        <input type="password" id="login-password" placeholder="password">
+      </div>
+      <div class="modal-footer">
+        <button class="nav-submit left" id="submit-login">Login</button>
+        <button class="nav-submit local-back">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="register" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Register</h4>
+      </div>
+      <div class="nav-form">
+        <input type="email" id="register-email" placeholder="email" autofocus>
+        <input type="password" id="register-password" placeholder="password">
+        <input type="password" id="confirm-password" placeholder="confirm password">
+      </div>
+      <div class="modal-footer">
+        <button class="nav-submit" id="submit-register">Register</button>
+        <button class="nav-submit local-back">Back</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="additional-information" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Profile</h4>
+      </div>
+      <div class="nav-form">
+        <input type="text" id="user-name" placeholder="name" autofocus>
+        <input type="text" id="user-address" placeholder="address">
+        <input type="text" id="user-city" placeholder="city">
+        <input type="text" id="user-state" placeholder="state">
+        <input type="number" id="user-zip" placeholder="zip">
+        <select name="animal" id="preferred-animal">
+          <option value=" ">animal</option>
+          <option value="cat">Cat</option>
+          <option value="dog">Dog</option>
+          <option value="bird">Bird</option>
+          <option value="reptile">Reptile</option>
+          <option value="small">Small Critters</option>
+          <option value="large">Large Critters</option>
+        </select>
+        <input type="checkbox" name="shelter" id="user-shelter" value="">Shelter<br>
+      </div>
+      <div class="modal-footer">
+        <button class="nav-submit" id="submit-update">Update</button>
+        <button class="nav-submit update-back">Back</button>
+        <$ if (user) { $>
+          <div class="hidden" id="oauth-id"><$= user.id $></div>
+        <$ } $>
+          <div class="hidden" id="imgur-key"><$= imgur_key $></div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="shelter-information" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Shelter Profile</h4>
+      </div>
+      <div class="nav-form">
+        <input type="text" id="shelter-name" placeholder="name" autofocus>
+        <input type="text" id="shelter-address" placeholder="address">
+        <input type="text" id="shelter-city" placeholder="city">
+        <input type="text" id="shelter-state" placeholder="state">
+        <input type="number" id="shelter-zip" placeholder="zip">
+        <input type="text" id="shelter-description" placeholder="description">
+        <input type="text" id="shelter-phone" placeholder="phone">
+        <input type="email" id="shelter-email" placeholder="email">
+      </div>
+      <div class="modal-footer">
+        <button class="nav-submit" id="submit-shelter">New Shelter</button>
+        <button class="nav-submit shelter-back">Back</button>
+      </div>
+    </div>
+  </div>
+
+          
+
+  <div id="shelter-update" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Shelter Profile</h4>
+      </div>
+      <div class="nav-form">
+        <div class="row">
+          <h6>Name: </h6>
+          <input class="right" type="text" id="shelter-u-name" placeholder="name" autofocus>
+        </div>
+        <div class="row">  
+          <h6>Address: </h6>
+          <input class="right" type="text" id="shelter-u-address" placeholder="address">
+        </div>
+        <div class="row">  
+          <h6>City:</h6>
+          <input class="right" type="text" id="shelter-u-city" placeholder="city">
+        </div>
+        <div class="row">  
+          <h6>State:</h6>
+          <input class="right" type="text" id="shelter-u-state" placeholder="state">
+        </div>
+        <div class="row">  
+          <h6>Zip:</h6>
+          <input class="right" type="number" id="shelter-u-zip" placeholder="zip">
+        </div>
+        <div class="row">  
+          <h6>Description:</h6>
+          <input class="right" type="text" id="shelter-u-description" placeholder="description">
+        </div>
+        <div class="row">  
+          <h6>Phone:</h6>
+          <input class="right" type="text" id="shelter-u-phone" placeholder="phone">
+        </div>
+        <div class="row">  
+          <h6>Email:</h6>
+          <input class="right" type="email" id="shelter-u-email" placeholder="email">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="nav-submit" id="update-shelter">Update Shelter</button>
+        <button class="nav-submit" id="delete-shelter">Delete Shelter</button>
+        <button class="nav-submit shelter-u-back right">Back</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4></h4>
+      </div>
+
+      <div class="modal-footer">
+        
+      </div>
     </div>
   </div>
 
@@ -198,6 +297,7 @@
     var userId = '';
     <$ if (user) { $>
       userId = '<$= user.id $>';
+      $('#update-button').show();
     <$ } $>
   </script>
 
@@ -287,6 +387,7 @@
      <div class="show-p-size-template" id ="<%= _id %>-show-pet-size"><%= size %></div>
      <div class="show-p-sex-template" id="<%= _id %>-show-pet-sex"><%= sex %></div>
      <div class="show-p-age-template" id="<%= _id %>-showt-pet-age"><%= age %></div>
+     <img src="<%= image %>" alt="Pet Picture">
    </div>
 
    </div>
