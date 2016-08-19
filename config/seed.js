@@ -1,5 +1,78 @@
 var mongoose = require('./database')
+var user = require('../models/user')
 var Shelter = require('../models/shelter')
+
+
+var newShelters = [
+{ // 0
+  name: "LA Animal Rescue",
+  address: "Chatsworth, CA 90025",
+  city: "Chatsworth",
+  state: "CA",
+  zip: 90025,
+  description: "",
+  phone: 424-208-8840,
+  email: "info@laar.org",
+  pets: []
+},
+{ // 1
+  name: "Paws Rescue",
+  address: "Decatur, AL 35603 US ",
+  city: "Decatur",
+  state: "AL",
+  zip: 35603,
+  description: "We are a small rescue. Paws rescue often takes animals that would be put to sleep in shelters.",
+  phone: 256-259-6511,
+  email: "pawsrescue@gmx.com",
+  pets: []
+},
+{ // 2
+  name: "Humane Society of Marion County",
+  address: "PO Box 1373 Yellville, AR 72687",
+  city: "Yellville",
+  state: "AR",
+  zip: 72687,
+  description: "",
+  phone: 818-660-1684,
+  email: "Humanesocietyyellville@yahoo.com",
+  pets: []
+},
+{ // 3
+  name: "Sunshine Rescue Group",
+  address: "15555 E. 14th Street, San Leandro, 94578",
+  city: "San Leandro",
+  state:"CA",
+  zip: "94578",
+  description: "",
+  phone: 510-483-4599,
+  email: "sunshinerescuegroup@yahoo.com",
+  pets: []
+},
+{ // 4
+  name: "Redwood Coast Humane Society",
+  address: "39151 S. Hwy 1",
+  city: "Gualala",
+  state: "CA",
+  zip: 95445,
+  description: "",
+  phone:  707-884-1304,
+  email: "",
+  pets: []
+},
+{ // 5
+  name: "Second Chance at Love Humane Society",
+  address: "Templeton CA 93465",
+  city: "Augusta",
+  state: "GA",
+  zip: "805-434-3982",
+  description: "",
+  phone: 706-790-6836,
+  email: "smeeks@augustaga.gov",
+  pets: []
+}
+
+];
+
 
 var pets = [
 { //0
@@ -7,7 +80,7 @@ var pets = [
   animal: "Cat",
   breed: "Siamese",
   size: "medium",
-  sex: "female",
+  gender: "female",
   age: "Young",
 
 },
@@ -16,7 +89,7 @@ var pets = [
   animal: "Rabbit",
   breed: "Mini-Lop & Bunny Rabbit Mix",
   size: "small",
-  sex: "female",
+  gender: "female",
   age: "Young"
 },
 { //2
@@ -24,7 +97,7 @@ var pets = [
   animal: "Hamster",
   breed: "Hamster",
   size: "small",
-  sex: "female",
+  gender: "female",
   age: "Young"
 },
 { //3
@@ -32,7 +105,7 @@ var pets = [
   animal: "Dog",
   breed: "Siberian Husky",
   size: "Large",
-  sex: "Male",
+  gender: "Male",
   age: "Adult"
 },
 { //4
@@ -40,7 +113,7 @@ var pets = [
   animal: "Pig",
   breed: "Pot Bellied",
   size: "medium",
-  sex: "Male",
+  gender: "Male",
   age: "Young"
 },
 { //5
@@ -48,7 +121,7 @@ var pets = [
   animal: "Dog",
   breed: "Terrier & Chihuahua Mix",
   size: "Small",
-  sex: "Female",
+  gender: "Female",
   age: "Baby"
 },
 { //6
@@ -56,15 +129,15 @@ var pets = [
   animal: "Dog",
   breed: "Pit Bull Terrier",
   size: "Medium",
-  sex: "Male",
-  age: "Young"
+  gender: "Male",
+  aggendere: "Young"
 },
 { //7
   name: "Mookie",
   animal: "Rabbit",
   breed: "Netherland Dwarf",
   size: "Small",
-  sex: "Female",
+  gender: "Female",
   age: "Adult"
 },
 { //8
@@ -72,7 +145,7 @@ var pets = [
   animal: "Bird",
   breed: "Conure",
   size: "Medium",
-  sex: "Unknown",
+  gender: "Unknown",
   age: "Young"
 },
 { //9
@@ -80,64 +153,28 @@ var pets = [
   animal: "Goat",
   breed: "Goat Mix",
   size: "Large",
-  sex: "Male",
+  gender: "Male",
   age: "Adult"
 }
 ];
 
+Shelter.remove({}, function (err) {
+  if (err) console.log(err);
+  Shelter.create(Shelters, function (err, shelters)
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Database seeded with " + shelter.length + " Shelters.")
+      mongoose.disconnect();
+    }
+  });
+});
 
 
-var shelters = new mongoose.Schema[
-{ // 0
-  name: "LA Animal Rescue",
-  location: "Chatsworth, CA 90025",
-  pets: pets,
-  description: "We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
-  contact_info: "(424) 208-8840"
-},
-{ // 1
-  name: "Rocky Mountain Animal Rescue",
-  location: "Mission Hills, California 91345",
-  pets: pets,
-  description:"We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
-  contact_info: "(818) 643-3989"
-},
-{ // 2
-  name: "Animal Specialty Group Inc",
-  location: "Los Angeles, CA 90030",
-  pets: pets,
-  description:"We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
-  contact_info: "818-660-0684"
-},
-{ // 3
-  name: "Animal Defenders International Inc",
-  location: "Los Angeles, CA 90048",
-  pets: pets,
-  description:"We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
-  contact_info: "323-935-2234"
-},
-{ // 4
-  name: "Animal Adoption Solutions",
-  location: "Santa Barbara, CA 93109",
-  pets: pets,
-  description:"We are a 501c3 non-profit organization. Adoption process includes an adoption contract and home check. Adoption fee for dogs are $300 - 500 and for cats are $175. All of our animals are fixed, vaccinated, and chipped.",
-  contact_info: "805-259-7356"
-},
-{ // 5
-  name: "Second Chance at Love Humane Society",
-  location: "Templeton CA 93465",
-  pets: pets,
-  description:"Second Chance at Love Humane Society is a nonprofit, no kill organization comprised of volunteer professionals dedicated to the rescue, care and placement of homeless dogs in the North San Luis Obispo County area of California with responsible families who will provide loving care for the lifetime of the animal.",
-  contact_info: "805-434-3982"
 }
 
-];
 
-// create a function for location in 1 array.
-
-
-
-module.exports = app;
+module.exports = Shelter;
 
 
 

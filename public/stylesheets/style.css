@@ -14,6 +14,7 @@ img {
   height: 64px;
 }
 
+
 .nav-button, .nav-submit {
 	background-color: rgba(0,0,0,0);
 	border: solid 0px;
@@ -224,26 +225,10 @@ a {
   margin: 2px 0 0px;
 
 }
-.pet-information li .followers {
+.pet-information li.followers {
   text-transform: uppercase;
 }
-.pet-information li:before {
-  position: absolute;
-  content: "\f105";
-  right: 30px;
-  top: 0;
-  bottom: 0;
-  height: 30px;
-  width: 30px;
-  border: 9px solid #ffffff;
-  border-radius: 30px;
-  margin: auto;
-  font-size: 18px;
-  font-family: FontAwesome;
-  color: #ffffff;
-  text-align: center;
-  line-height: 26px;
-}
+
 .pet-information li:hover:before {
   background-color: #ffffff;
   color: #999999;
