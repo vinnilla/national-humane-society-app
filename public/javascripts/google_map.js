@@ -99,7 +99,7 @@ document.getElementById('submit').addEventListener('click', function() {
         console.log(shelter.name);
         //create a class for each property to show the values by individual shelter
         $('#show-shelter-name').html(`${shelter.name}`);
-        $('#show-shelter-location').html(`<h2 class="show-font-location">${shelter.address}</h2><h2 class="show-font-location">${shelter.city}, ${shelter.state} - ${shelter.zip}</h2>`);
+        $('#show-shelter-location').html(`<h2 class="show-font-location">${shelter.address}</h2><br><h2 class="show-font-location">${shelter.city}, ${shelter.state} - ${shelter.zip}</h2>`);
         $('#show-shelter-contact').html(`<h3 class="show-font-contact"> Phone: ${shelter.phone}</h3> <h3 class="show-font-contact">Email: ${shelter.email}</h3>`);
        var showPetTemplate = _.template($('#show-pet-template').html());
         //create a class to generate the pet template in html
