@@ -19,7 +19,7 @@ var shelterSchema = new mongoose.Schema({
   zip: Number,
   pets: [petSchema],
   description: String,
-  phone: String,
+  phone: Number,
   email: String,
   userId: String
 });
