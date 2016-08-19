@@ -2,7 +2,6 @@
 var Shelter = require("../models/shelter");
 var rp = require("request-promise");
 var User = require("../models/user");
-var imgur = require('imgur');
 
 function index(req, res, next) {
   Shelter.find({}, function(err, shelters) {
