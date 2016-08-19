@@ -2,9 +2,9 @@
 NADOPet
 ===
 
-App link to [Heroku]()
+App link to [Heroku](http://nadopet.herokuapp.com/)
 ----
-App link to [Trello]()
+App link to [Trello](https://trello.com/b/SXhRA4ej/national-humane-society-web-application)
 ----
 
 ![Wireframe](https://trello-attachments.s3.amazonaws.com/57ad54de54192d6dce67299c/2338x1700/28a0fc357ae9e55c5ad3e5e5dac3154e/Scan_20160811.png)
