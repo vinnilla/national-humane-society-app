@@ -2,7 +2,7 @@
 
 
   var delay = 500;
-
+// set the map options (zoom, roadmap,typewith and center in the USA)
   var infowindow = new google.maps.InfoWindow();
   var latlng = new google.maps.LatLng(37.09024, -95.712891);
   var mapOptions = {
@@ -22,6 +22,7 @@
 
 
 //get and set the element by id submited from input location and generate coordinate to mark the map
+//for the search of user location
 document.getElementById('submit').addEventListener('click', function() {
     geocodeAddress(geocoder, map);
     console.log('clicked');
@@ -42,6 +43,7 @@ document.getElementById('submit').addEventListener('click', function() {
           // createMarker(address,lat,lng);
 
         }
+        //using the delay to sapce timing for set markers
         else {
            if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
             nextAddress--;
@@ -49,7 +51,6 @@ document.getElementById('submit').addEventListener('click', function() {
           } else {
                         }
         }
-        // next();
       }
     );
   }
@@ -87,28 +88,32 @@ document.getElementById('submit').addEventListener('click', function() {
   google.maps.event.addListener(marker, 'click', function() {
      infowindow.setContent(`<button class="show_shelter" data-target="modal1" id='${id}''> ${contentString} </button>`);
      infowindow.open(map,marker);
+     //initialize on click of shelter name a view of individual shelter and pets related to the shelter
      $(".show_shelter").click(function() {
+      //initialize the modal css effect
       $('#modal1').openModal();
       var shelter_id = $(".show_shelter").attr('id');
       console.log(shelter_id)
       $.get(`/shelters/${shelter_id}`)
       .then(function(shelter){
         console.log(shelter.name);
-        $('#show-shelter-name').html(`<h1>${shelter.name}</h1>`);
-        $('#show-shelter-location').html(`<h1>${shelter.address}</h1><h2>${shelter.city}, ${shelter.state} - ${shelter.zip}</h2>`);
-        $('#show-shelter-contact').html(`Phone: ${shelter.phone} Email: ${shelter.email}`);
+        //create a class for each property to show the values by individual shelter
+        $('#show-shelter-name').html(`${shelter.name}`);
+        $('#show-shelter-location').html(`<h2 class="show-font-location">${shelter.address}</h2><h2 class="show-font-location">${shelter.city}, ${shelter.state} - ${shelter.zip}</h2>`);
+        $('#show-shelter-contact').html(`<h3 class="show-font-contact"> Phone: ${shelter.phone}</h3> <h3 class="show-font-contact">Email: ${shelter.email}</h3>`);
        var showPetTemplate = _.template($('#show-pet-template').html());
+        //create a class to generate the pet template in html
         $('.show-shelter-all-pets').html('');
+        //create a class for properties of each pet related to the shelter
         shelter.pets.forEach(function(pet) {
           $(".show-shelter-all-pets").append(showPetTemplate(pet));
-          // $(`#${pet._id}-show-pet-name`).val(pet.name);
-          // $(`#${pet._id}-show-pet-animal`).val(pet.animal);
-          // $(`#${pet._id}-show-pet-breed`).val(pet.breed);
-          // $(`#${pet._id}-show-pet-size`).val(pet.size);
-          // $(`#${pet._id}-show-pet-sex`).val(pet.sex);
-          // $(`#${pet._id}-show-pet-age`).val(pet.age);
-        })
 
+        })
+          //initilize class from materialize css to zoom the pet picture
+         $('.materialboxed').materialbox();
+
+
+         //initialie the pet template view by pet_id on the modal of related shelter
         $(".show-shelter-pet" ).show();
 
         })
@@ -121,7 +126,7 @@ document.getElementById('submit').addEventListener('click', function() {
  };
 
 
-
+//Use get to select the shelters and run a forEach loop to add a shelter id, name and location the map
 var locations = [];
 var names = [];
 var ids = [];
@@ -138,7 +143,7 @@ $.get('/shelters')
     theNext();
   })
 
- //Example array to populate the map
+ //Example array used to populate the map test
   // var locations = [
   //          'temecula, US',
   //          'los angeles, US',
@@ -146,7 +151,7 @@ $.get('/shelters')
   //          'las vegas, NV'
   // ];
 
-  //Will set the next marker based on the location array
+  //Will set the next marker based on the location array passing the name and id.
   var nextAddress = 0;
   function theNext() {
     if (nextAddress < locations.length) {
@@ -155,23 +160,7 @@ $.get('/shelters')
     } else {
       map.fitBounds(bounds);
     }
-  }
-
-
-// $('.modal-trigger').leanModal({
-//       dismissible: true, // Modal can be dismissed by clicking outside of the modal
-//       opacity: .5, // Opacity of modal background
-//       in_duration: 300, // Transition in duration
-//       out_duration: 200, // Transition out duration
-//       starting_top: '4%', // Starting top style attribute
-//       ending_top: '10%', // Ending top style attribute
-//       ready: function() { alert('Ready'); }, // Callback for Modal open
-//       complete: function() { alert('Closed'); } // Callback for Modal close
-//     }
-//   );
-
-
-//$('#modal1').openModal();
+  };
 
 
 
@@ -182,9 +171,10 @@ $.get('/shelters')
 
 
 
-//   // NOTE: This uses cross-domain XHR, and may not work on older browsers.
-//   // map.data.loadGeoJson(
-//   //     '/models/user.js');
+
+
+
+
 
 
 
