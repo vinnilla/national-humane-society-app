@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 console.log('document loaded');
 
+// register new user (locally)
 $("#submit-register").click(function () {
   // grab data from html form
   var email = $("#register-email").val()
@@ -22,6 +23,7 @@ $("#submit-register").click(function () {
       $("#errors").html(`Error: ${data.error}`);
     }
     else {
+      // show and hide related html
       $("#errors").html('');
       $("#results").html(data.msg)
       $("#oauth").show();
@@ -32,10 +34,12 @@ $("#submit-register").click(function () {
   })
 })
 
+// login as existing user (locally)
 $("#submit-login").click(function () {
   var email = $("#login-email").val()
   var password = $("#login-password").val()
 
+  // attempt a post to login method in usercontroller
   $.post("/login", {
     email: email,
     password: password
@@ -49,11 +53,14 @@ $("#submit-login").click(function () {
           // the token
       localStorage.token = data.token
       localStorage.id = data.id
+
+      // need to retrieve user information to show appropriate nav-buttons on login
       $.get(`/users/${localStorage.id}`)
         .then(function(user) {
           // has shelter
           if (user.shelterId) {
             localStorage.shelter = user.shelterId;
+            // show shelter buttons
             $(".edit-shelter-button").show();
             $("#pet-button").show();
             $("#show-pets-button").show();
@@ -76,6 +83,7 @@ $("#submit-login").click(function () {
   })
 })
 
+// update user information (works with local and oauth users)
 $("#submit-update").click(function() {
   var name = $("#user-name").val();
   var address = $("#user-address").val();
@@ -88,6 +96,7 @@ $("#submit-update").click(function() {
   var oauthId = $("#oauth-id").html();
   if (!oauthId) oauthId = localStorage.id;
 
+  // patch information
   $.ajax({
     url: `/users/${oauthId}`,
     type: "patch",
@@ -107,6 +116,7 @@ $("#submit-update").click(function() {
         $("#errors").html(`Error: ${data.error}`);
       }
       else {
+        // hide form and show update button
         $("#errors").html('');
         $("#additional-information").hide();
         $("#update-button").show();
@@ -116,7 +126,9 @@ $("#submit-update").click(function() {
     })
 })
 
+// add a new shelter to database (addition won't appear on map until page refresh)
 $("#submit-shelter").click(function() {
+  // retrieve data from form
   var name = $("#shelter-name").val();
   var address = $("#shelter-address").val();
   var city = $("#shelter-city").val();
@@ -128,6 +140,7 @@ $("#submit-shelter").click(function() {
   var oauthId = $("#oauth-id").html();
   if (!oauthId) oauthId = localStorage.id;
 
+  // send post to database
   $.post(`/users/${oauthId}/shelters`, {
     name: name,
     address: address,
@@ -144,6 +157,7 @@ $("#submit-shelter").click(function() {
       $("#errors").html(`Error: ${data.error}`);
     }
     else {
+      // hide form and show edit shelter button
       $("#errors").html('');
       $("#results").html(data.msg, data.shelter);
       $(".edit-shelter-button").show();
@@ -164,21 +178,36 @@ $("#user-shelter").click(function() {
   console.log(box.val());
 });
 
-$("#get-users").click(function () {
-  $.get("/users", { token: localStorage.token })
-  .then(function (users) {
-    $("#users").html(JSON.stringify(users))
-  })
-})
+// this was used in testing
+// $("#get-users").click(function () {
+//   $.get("/users", { token: localStorage.token })
+//   .then(function (users) {
+//     $("#users").html(JSON.stringify(users))
+//   })
+// })
 
+
+// the next few click events are nav-buttons that show and hide forms
 $("#login-button").click(function() {
   $("#login").show();
+  $("#login-button").hide();
+  $("#register-button").hide();
+})
+$("#welcome-login").click(function() {
+  $("#login").show();
+  $("#welcome").hide();
   $("#login-button").hide();
   $("#register-button").hide();
 })
 
 $("#register-button").click(function() {
   $("#register").show();
+  $("#login-button").hide();
+  $("#register-button").hide();
+})
+$("#welcome-register").click(function() {
+  $("#register").show();
+  $("#welcome").hide();
   $("#login-button").hide();
   $("#register-button").hide();
 })
@@ -190,6 +219,7 @@ $(".local-back").click(function() {
   $("#register-button").show();
 })
 
+// updating users prefills the form with user data
 $("#update-button").click(function() {
   var oauthId = $("#oauth-id").html();
   if (!oauthId) oauthId = localStorage.id;
@@ -218,6 +248,7 @@ $("#shelter-button").click(function() {
   $("#shelter-information").show();
 })
 
+// updating shelter prefills form with shelter data
 $(".edit-shelter-button").click(function() {
   var oauthId = $("#oauth-id").html();
   if (!oauthId) oauthId = localStorage.id;
@@ -240,7 +271,9 @@ $(".edit-shelter-button").click(function() {
     })
 })
 
+// update shelter in database
 $("#update-shelter").click(function() {
+  // retrieve information from forms
   var name = $("#shelter-u-name").val();
   var address = $("#shelter-u-address").val();
   var city = $("#shelter-u-city").val();
@@ -250,6 +283,7 @@ $("#update-shelter").click(function() {
   var phone = $("#shelter-u-phone").val();
   var email = $("#shelter-u-email").val();
 
+  // attempt patch
   $.ajax({
     url: `/shelters/${localStorage.shelter}`,
     type: "patch",
@@ -277,6 +311,7 @@ $("#update-shelter").click(function() {
     })
 })
 
+// delete shelter from database
 $("#delete-shelter").click(function() {
   $.ajax({
     url: `/shelters/${localStorage.shelter}`,
@@ -312,6 +347,7 @@ $("#submit-shelter").click(function() {
   $("#show-pets-button").show();
 })
 
+// show new pet form
 $("#pet-button").click(function() {
   // $("#pet-button").hide();
   $("#pet-name").val('');
@@ -331,6 +367,7 @@ $(".pet-back").click(function() {
   $("#pet-button").show();
 })
 
+// saving new pet to database (image uploading to imgur occurs here)
 $("#submit-pet").click(function() {
   var name = $("#pet-name").val();
   var animal = $("#pet-animal").val();
@@ -340,16 +377,18 @@ $("#submit-pet").click(function() {
   var age = $("#pet-age").val();
   var img = new Image();
   var imgur = $("#imgur-key").html();
-
+  // retrieve image from form
   var uploadedImage = $("#pet-image")[0].files[0];
   // console.log(typeof uploadedImage);
 
-
+  // show image 
   img.src = window.URL.createObjectURL(uploadedImage);
   img.height = 100;
   $("#test-image").html(img);
   $("#loading").show();
   console.log(img.src);
+
+  // FAILED ATTEMPT TO CONVERT IMAGE TO BASE64 BEFORE UPLOADING TO IMGUR :(
 
   // var fileReader = new FileReader();
   // var data = fileReader.readAsDataURL(uploadedImage)
@@ -388,6 +427,7 @@ $("#submit-pet").click(function() {
   })
     .then(function(result) {
       console.log(result.data.link);
+      // send post to database (with returned imgur url)
       $.ajax({
         url: `/shelters/${localStorage.shelter}/pet`,
         type: "patch",
@@ -417,6 +457,7 @@ $("#submit-pet").click(function() {
     });
   });
 
+// local logout
 $("#logout").click(function () {
   $("#login-button").show();
   $("#register-button").show();
@@ -432,18 +473,22 @@ $("#logout").click(function () {
   localStorage.removeItem('id');
 })
 
-$("#get-user").click(function() {
-  var oauthId = $("#oauth-id").html();
-  if (!oauthId) oauthId = localStorage.id;
-  $.get(`/users/${oauthId}`, { token: localStorage.token })
-  .then(function (user) {
-    $("#users").html(JSON.stringify(user))
-  })
-})
+// for testing
+// $("#get-user").click(function() {
+//   var oauthId = $("#oauth-id").html();
+//   if (!oauthId) oauthId = localStorage.id;
+//   $.get(`/users/${oauthId}`, { token: localStorage.token })
+//   .then(function (user) {
+//     $("#users").html(JSON.stringify(user))
+//   })
+// })
 
+
+// showing the pets that belong to the user's shelter
 petTemplate = _.template($("#pet-template").html());
 
 $("#show-pets-button").click(function() {
+  // grab data from database
   $.get(`/shelters/${localStorage.shelter}/pets`)
     .then(function(data) {
       if (data.error) {
@@ -452,9 +497,10 @@ $("#show-pets-button").click(function() {
       else {
         $("#pet-block").html('');
         data.forEach(function(pet) {
+          // show html using template
           $("#pet-block").append(petTemplate(pet));
 
-
+          // set form values with pet information
           $(`#${pet._id}-u-pet-name`).val(pet.name);
           $(`#${pet._id}-u-pet-animal`).val(pet.animal);
           $(`#${pet._id}-u-pet-breed`).val(pet.breed);
@@ -462,6 +508,7 @@ $("#show-pets-button").click(function() {
           $(`#${pet._id}-u-pet-sex`).val(pet.sex);
           $(`#${pet._id}-u-pet-age`).val(pet.age);
 
+          // update pet information
           $(`#${pet._id}-submit`).click(function() {
             var name = $(`#${pet._id}-u-pet-name`).val();
             var animal = $(`#${pet._id}-u-pet-animal`).val();
@@ -511,7 +558,10 @@ $("#show-pets-button").click(function() {
             $(`#${pet._id}-edit`).show();
             $(`#${pet._id}-update`).hide();
             $(`#${pet._id}-back`).hide();
+            $(`#${pet._id}-submit`).hide();
           }); //end of submit click event
+
+          // delete pet
           $(`#${pet._id}-delete`).click(function() {
             $.ajax({
               url: `/shelters/${localStorage.shelter}/pets/${pet._id}`,
@@ -527,20 +577,23 @@ $("#show-pets-button").click(function() {
               };
             });
             $("#errors").html('');
-            $(`#${pet._id}-edit`).show();
+            $(`#${pet._id}-edit`).hide();
             $(`#${pet._id}-update`).hide();
             $(`#${pet._id}-back`).hide();
+            $(`#${pet._id}-submit`).hide();
           }); //end of delete click event
 
           $(`#${pet._id}-edit`).click(function() {
             $(`#${pet._id}-update`).show();
             $(`#${pet._id}-back`).show();
+            $(`#${pet._id}-submit`).show();
             $(`#${pet._id}-edit`).hide();
           })
           $(`#${pet._id}-back`).click(function() {
             $(`#${pet._id}-edit`).show();
             $(`#${pet._id}-update`).hide();
             $(`#${pet._id}-back`).hide();
+            $(`#${pet._id}-submit`).hide();
           })
         }); //end of for each
         $("#errors").html('');
@@ -553,6 +606,10 @@ $("#show-pets-button").click(function() {
 $(".show-pets-back").click(function() {
   $("#pet-div").hide();
   $("#show-pets-button").show();
+})
+
+$("#welcome-close").click(function() {
+  $("#welcome").hide();
 })
 
 })
