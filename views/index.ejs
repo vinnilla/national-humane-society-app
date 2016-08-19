@@ -12,10 +12,6 @@
 
   <link rel="stylesheet" href="stylesheets/style.css"/>
 
-
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-
-
   <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
 
   <link rel="icon"
@@ -25,6 +21,7 @@
 </head>
 <body>
 
+  <!-- WELCOME OVERLAY -->
   <$ if (!user) { $>
   <div id="welcome">
     <div class="modal-content" id="welcome-content">
@@ -49,7 +46,7 @@
     <nav>
       <div class="nav-wrapper"><img alt="Brand" src="http://www.sumopaint.com/images/temp/xzfjiaqlppagfpsj.png">
         <a href="/" class="brand-logo left">NADO<span>Pet</span></a>
-
+        
         <!-- first right -->
 
         <ul class="right">
@@ -112,6 +109,7 @@
           <$ }} else { $>
           <button class="nav-button hidden" id="show-pets-button">Pets</button>
           <$ } $>
+          <div id="results"></div>
         </ul>
     </nav>
     <div id="floating-panel">
@@ -127,6 +125,7 @@
         <button class="nav-submit local-back right">X</button>
       <div class="modal-header">
         <h4>Login</h4>
+        <div id="errors"></div>
       </div>
       <div class="nav-form">
         <input type="email" id="login-email" placeholder="email" autofocus>
@@ -372,13 +371,7 @@
 
 
 
-  <!-- WELCOME OVERLAY -->
 
-
-
-
-  <div id="errors"></div>
-  <div id="results"></div>
 
     <!-- <div class="col s6">
       <button id="get-users">Get Users</button>

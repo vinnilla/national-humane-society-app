@@ -25,7 +25,7 @@
 //for the search of user location
 document.getElementById('submit').addEventListener('click', function() {
     geocodeAddress(geocoder, map);
-    console.log('clicked');
+    // console.log('clicked');
   });
 
 
@@ -93,10 +93,10 @@ document.getElementById('submit').addEventListener('click', function() {
       //initialize the modal css effect
       $('#modal1').openModal();
       var shelter_id = $(".show_shelter").attr('id');
-      console.log(shelter_id)
+      // console.log(shelter_id)
       $.get(`/shelters/${shelter_id}`)
       .then(function(shelter){
-        console.log(shelter.name);
+        // console.log(shelter.name);
         //create a class for each property to show the values by individual shelter
         $('#show-shelter-name').html(`${shelter.name}`);
         $('#show-shelter-location').html(`<h2 class="show-font-location">${shelter.address}</h2><br><h2 class="show-font-location">${shelter.city}, ${shelter.state} - ${shelter.zip}</h2>`);
@@ -136,7 +136,7 @@ $.get('/shelters')
       names.push(shelter.name);
       locations.push(`${shelter.address} ${shelter.city} ${shelter.state} ${shelter.zip}`);
       ids.push(shelter._id);
-      console.log(locations);
+      // console.log(locations);
     })
   })
   .then(function(data) {

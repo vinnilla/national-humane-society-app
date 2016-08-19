@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-console.log('document loaded');
+console.log('Welcome to NADOPeT!');
 
 // register new user (locally)
 $("#submit-register").click(function () {
@@ -213,6 +213,13 @@ $("#welcome-register").click(function() {
 })
 
 $(".local-back").click(function() {
+  $("#errors").html('');
+  $("#results").html('');
+  $("#login-email").val('');
+  $("#login-password").val('');
+  $("#register-email").val('');
+  $("#register-password").val('');
+  $("#confirm-password").val('');
   $("#login").hide();
   $("#register").hide();
   $("#login-button").show();
