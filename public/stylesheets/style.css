@@ -159,8 +159,9 @@ option {
 }
 
 .card-image {
-  max-width: 250px;
-  max-height: 400px;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
   margin: 0 auto;
 }
 
