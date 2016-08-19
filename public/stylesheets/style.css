@@ -14,7 +14,7 @@
 .nav-wrapper {
 	background-color: rgba(0,0,0,.9); }
 
-img {
+#nadopet-logo {
   height: 64px;
 }
 
@@ -158,9 +158,9 @@ option {
   margin-left: 20px;
 }
 
-#pet_img_show {
-  width: 250px;
-  height: 200px;
+.card-image {
+  max-width: 250px;
+  max-height: 400px;
 }
 
 .show_shelter {
@@ -345,6 +345,12 @@ p {
   max-height: 85%;
   overflow: auto;
 }
+
+#main-modal {
+  margin: 0 auto 0 auto !important;
+  width: 90% !important;  
+}
+
 
 .modal {
   z-index: 999;
