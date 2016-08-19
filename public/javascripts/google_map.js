@@ -115,8 +115,8 @@ document.getElementById('submit').addEventListener('click', function() {
 
          //initialie the pet template view by pet_id on the modal of related shelter
         $(".show-shelter-pet" ).show();
-
-        })
+        infowindow.close(map, marker);
+        })// end of then response
       })
 
     });
