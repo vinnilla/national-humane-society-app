@@ -13,7 +13,11 @@
   <link rel="stylesheet" href="stylesheets/style.css"/>
 
 
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+
   <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+
   <link rel="icon"
       type="image/png"
       href="http://www.sumopaint.com/images/temp/xzfjiaqlppagfpsj.png">
@@ -35,7 +39,7 @@
         <button class="welcome-option" id="welcome-register">Register</button>
       </div>
       <div class="modal-footer">
-        
+
       </div>
     </div>
   </div>
@@ -321,6 +325,7 @@
     </div>
   </div>
 
+
   <div id="pet-div" class="modal">
     <div class="modal-content">
         <button class="nav-submit show-pets-back right">X</button>
@@ -337,10 +342,14 @@
 
 
 
+
   <!-- SHOW SHELTER -->
+
 
   <div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right"  style="color:white;">Close</a>
+
       <div class="modal-header">
         <h4>Shelter</h4>
       </div>
@@ -350,19 +359,24 @@
           <div class="show-shelter-location" id="show-shelter-location"></div>
           <div class="show-shelter-contact" id="show-shelter-contact"></div>
         </div>
-        <div class="show-shelter-all-pets">
-        </div>
+        <div class="show-shelter-all-pets"></div>
       </div>
       <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
       </div>
     </div>
   </div>
 
+
+<!-- End modal view for shelter and pets -->
+
+
+
+
   <!-- WELCOME OVERLAY -->
 
-  
-          
+
+
+
   <div id="errors"></div>
   <div id="results"></div>
 
@@ -372,7 +386,21 @@
       <div id="users"></div>
     </div>
      -->
-  </div>
+
+
+
+
+  <!-- embed the current user's id -->
+  <script>
+    var userId = '';
+    <$ if (user) { $>
+      userId = '<$= user.id $>';
+      $('#update-button').show();
+    <$ } $>
+  </script>
+
+
+<!-- google map api -->
 
   <div id= googlemaps>
      <div id="map">
@@ -382,7 +410,8 @@
      </div>
   </div>
 
-</div>
+
+<!-- End google map api -->
 
 
 <!-- bottom pet info links -->
@@ -435,17 +464,34 @@
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<$= google_map_key $>">
  </script>
 
-  <script type="text/template" id="show-pet-template">
-    <div class="show-shelter-pet" id="<%= _id %>-show-shelter-pet">
-      <div class="show-p-name-template" id="<%= _id %>-show-pet-name"><%= name %></div>
-      <div class="show-p-animal-template" id="<%= _id %>-show-pet-animal"><%= animal %></div>
-      <div class="show-p-breed-template" id="<%= _id %>-show-pet-breed"><%= breed %></div>
-      <div class="show-p-size-template" id ="<%= _id %>-show-pet-size"><%= size %></div>
-      <div class="show-p-sex-template" id="<%= _id %>-show-pet-sex"><%= sex %></div>
-      <div class="show-p-age-template" id="<%= _id %>-showt-pet-age"><%= age %></div>
-      <img src="<%= image %>" alt="Pet Picture">
-    </div>
-  </script>
+<!-- template for shelters pets -->
+
+<script type="text/template" id="show-pet-template">
+     <!-- <div class="row"> -->
+        <!-- <div class="col s12 m7 inline-box" > -->
+          <div class="card">
+            <div class="card-image">
+              <img id="pet_img_show" class="materialboxed" width="650" src="<%= image %>" alt="Pet Picture">
+            </div>
+
+
+      <div class="card-content" class="show-shelter-pet" id="<%= _id %>-show-shelter-pet">
+      <p style= "color:black; font-weight:bold; font-size:20px;" class="show-p-name-template" id="<%= _id %>-show-pet-name"><%= name %></p> </br>
+      <p style= "color:black; font-weight:bold" class="show-p-animal-template" id="<%= _id %>-show-pet-animal">Animal: <%= animal %></p></br>
+      <p style= "color:black; font-weight:bold" class="show-p-breed-template" id="<%= _id %>-show-pet-breed">Breed: <%= breed %></p></br>
+      <p style= "color:black; font-weight:bold"  class="show-p-size-template" id ="<%= _id %>-show-pet-size">Size: <%= size %></p></br>
+      <p style= "color:black; font-weight:bold" class="show-p-sex-template" id="<%= _id %>-show-pet-sex">Sex: <%= sex %></p></br>
+      <p style= "color:black; font-weight:bold" class="show-p-age-template" id="<%= _id %>-showt-pet-age">Age: <%= age %></p>
+      </div>
+
+
+
+          </div>
+        <!-- </div> -->
+      <!-- </div> -->
+</script>
+
+  <!-- End of template shelter pets -->
 
 
   <script type="text/template" id="pet-template">
@@ -493,6 +539,7 @@
 
 
 
+
   <!-- jQuery (required by Materialize) -->
   <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
   <!-- Using Underscore for collection manipulation and client-side templatin -->
@@ -500,6 +547,7 @@
   <!-- JavaScript for Materialize -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <script src="javascripts/app.js"></script>
+  <!-- Javascript for google api and shelter pets view -->
   <script src="/javascripts/google_map.js" type="text/javascript"></script>
 
 </body>
