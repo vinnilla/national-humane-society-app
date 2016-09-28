@@ -4,6 +4,8 @@ NADOPet
 
 App link to [Heroku](http://nadopet.herokuapp.com/)
 ----
+![Site](http://i.imgur.com/VRTvP8y.png)
+
 App link to [Trello](https://trello.com/b/SXhRA4ej/national-humane-society-web-application)
 ----
 
